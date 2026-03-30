@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Strona projektowa na przedmiot Programowanie w Internecie - Szymon Świeboda, s223412. Technologie: HTML5, CSS3, JavaScript.">
+    <title>Programowanie w Internecie - Moja Strona</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-------------------------------------- Nawigacja SPA --------------------------------------->
+    <nav id="nawigacja" class="nawigacja" aria-label="Nawigacja główna">
+        <div class="nav-kontener">
+            <a href="#powitanie" class="nav-logo">Szymon Świeboda</a>
+            <button class="hamburger" id="hamburger" type="button" aria-label="Otwórz menu" aria-expanded="false"
+                aria-controls="nav-menu">
+                <span class="hamburger-linia"></span>
+                <span class="hamburger-linia"></span>
+                <span class="hamburger-linia"></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#powitanie" class="nav-link aktywny">Start</a></li>
+                <li><a href="#technologie" class="nav-link">Technologie</a></li>
+                <li><a href="#gra" class="nav-link">Gra</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-------------------------------------- Sekcja powitalna --------------------------------------->
+    <header id="powitanie" class="powitanie">
+        <div class="zawartosc-powitania">
+            <h1>Programowanie w Internecie</h1>
+            <p class="podtytul">Moja strona | Szymon Świeboda, s223412</p>
+            <p class="opis">Prosta, minimalistyczna i estetyczna strona oparta na czystym kodzie HTML5 i CSS3, zgodna z
+                najnowszymi standardami W3C.</p>
+            <a href="#technologie" class="przycisk">Dowiedz się więcej &#8595;</a>
+        </div>
+    </header>
+
+    <main>
+        <!-------------------------------------- Sekcja z technologiami --------------------------------------->
+        <section id="technologie" class="sekcja-technologii">
+            <h2>Wykorzystane technologie</h2>
+
+            <div class="kontener-kafelkow">
+                <article class="kafelek">
+                    <h3>HTML5</h3>
+                    <p>Struktura strony w oparciu o tagi, takie jak <code>&lt;header&gt;</code>,
+                        <code>&lt;main&gt;</code> i <code>&lt;article&gt;</code>, które są zgodne ze standardem W3C.
+                    </p>
+                </article>
+
+                <article class="kafelek">
+                    <h3>CSS3</h3>
+                    <p>Estetyka przy pomocy czystego CSS. Właściwość <code>scroll-behavior: smooth</code> sprawia, że
+                        nawigacja po stronie jest płynna.</p>
+                </article>
+
+                <article class="kafelek">
+                    <h3>Układ Flexbox</h3>
+                    <p>Do ułożenia kafelków obok siebie wykorzystałem moduł Flexbox, dzięki czemu układ strony jest
+                        elastyczny i sam dostosowuje się do ekranu.</p>
+                </article>
+
+                <article class="kafelek">
+                    <h3>Gra w JS</h3>
+                    <p>Zaimplementowana w czystym JS gra w &quot;kółko i krzyżyk&quot; z trzema wariantami trudności dla
+                        trybu jednoosobowego oraz trybem dla dwóch graczy.</p>
+                    <div class="kafelek-akcja">
+                        <a href="#gra" class="przycisk przycisk-maly">Zagraj teraz</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-------------------------------------- Sekcja z grą --------------------------------------->
+        <section id="gra" class="sekcja-gry">
+            <h2>Kółko i krzyżyk</h2>
+
+            <div class="gra-kontener">
+                <div class="opcje-gry">
+                    <div class="tryb-wybor">
+                        <span class="opcja-etykieta">Tryb gry:</span>
+                        <button class="btn-opcja aktywny" id="btn-1osoba" type="button">1 Gracz</button>
+                        <button class="btn-opcja" id="btn-2osoby" type="button">2 Graczy</button>
+                    </div>
+
+                    <div class="poziom-wybor" id="poziom-kontener">
+                        <span class="opcja-etykieta">Poziom trudności:</span>
+                        <button class="btn-poziom" data-poziom="1" type="button">Łatwy</button>
+                        <button class="btn-poziom aktywny" data-poziom="2" type="button">Średni</button>
+                        <button class="btn-poziom" data-poziom="3" type="button">Trudny</button>
+                    </div>
+                </div>
+
+                <div class="status-gry" id="status">Kolej gracza: X</div>
+
+                <div class="plansza" id="plansza">
+                    <div class="komorka" data-indeks="0"></div>
+                    <div class="komorka" data-indeks="1"></div>
+                    <div class="komorka" data-indeks="2"></div>
+                    <div class="komorka" data-indeks="3"></div>
+                    <div class="komorka" data-indeks="4"></div>
+                    <div class="komorka" data-indeks="5"></div>
+                    <div class="komorka" data-indeks="6"></div>
+                    <div class="komorka" data-indeks="7"></div>
+                    <div class="komorka" data-indeks="8"></div>
+                </div>
+
+                <button id="btn-restart" class="przycisk" type="button">Zagraj ponownie</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Projekt na przedmiot: Programowanie w Internecie. Autor: Szymon Świeboda (s223412)</p>
+    </footer>
+
+    <!-------------------------------------- Przycisk przewinięcia do góry --------------------------------------->
+    <button id="btn-do-gory" class="btn-do-gory" type="button" aria-label="Przewiń do góry">&#8593;</button>
+
+    <script src="gra.js"></script>
+    <script src="main.js"></script>
+
+</body>
+
+</html>

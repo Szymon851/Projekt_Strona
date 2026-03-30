@@ -1,0 +1,599 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background-color: #fafafa;
+    color: #2d3748;
+    scroll-padding-top: 70px;
+}
+
+body {
+    /* Wersja STICKY */
+    padding-top: 60px;
+
+    /* Wersja NIE-STICKY
+    padding-top: 0;
+    */
+}
+
+/* NAWIGACJA SPA */
+.nawigacja {
+    /* Wersja STICKY */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+
+    /* Wersja NIE-STICKY (trzeba zakomentować linie powyżej)
+    position: relative;
+    */
+
+    background-color: rgba(255, 255, 255, 0.97);
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.nav-kontener {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding: 0 20px;
+}
+
+.nav-logo {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #2b6cb0;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav-logo:hover {
+    color: #2c5282;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 5px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #4a5568;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-weight: 500;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-link:hover,
+.nav-link.aktywny {
+    background-color: #ebf4ff;
+    color: #2b6cb0;
+}
+
+/* HAMBURGER MENU */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.hamburger-linia {
+    width: 25px;
+    height: 3px;
+    background-color: #2d3748;
+    border-radius: 3px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+/* Animacja hamburger */
+.hamburger.aktywny .hamburger-linia:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger.aktywny .hamburger-linia:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.aktywny .hamburger-linia:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* SEKCJA POWITALNA */
+.powitanie {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(to bottom, #ffffff, #f0f4f8);
+    padding: 40px 20px;
+}
+
+.zawartosc-powitania {
+    max-width: 700px;
+}
+
+.powitanie h1 {
+    font-size: 3rem;
+    color: #1a202c;
+    margin-bottom: 10px;
+}
+
+.podtytul {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #4a5568;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.opis {
+    font-size: 1.1rem;
+    color: #718096;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+/* PRZYCISK */
+.przycisk {
+    display: inline-block;
+    padding: 14px 30px;
+    background-color: #2b6cb0;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    font-family: inherit;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.przycisk:hover {
+    background-color: #2c5282;
+    transform: translateY(-2px);
+}
+
+.przycisk:active {
+    transform: translateY(0);
+}
+
+.przycisk-maly {
+    padding: 10px 22px;
+    font-size: 0.9rem;
+}
+
+/* SEKCJA TECHNOLOGII */
+.sekcja-technologii {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.sekcja-technologii h2 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    color: #1a202c;
+}
+
+/* KAFELKI */
+.kontener-kafelkow {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.kafelek {
+    background-color: #ffffff;
+    flex: 1;
+    min-width: 250px;
+    max-width: 450px;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.kafelek:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+.kafelek h3 {
+    color: #2b6cb0;
+    margin-bottom: 15px;
+}
+
+.kafelek p {
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+.kafelek-akcja {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* ELEMENT <code> */
+code {
+    background-color: #edf2f7;
+    padding: 3px 6px;
+    border-radius: 4px;
+    color: #e53e3e;
+    font-family: monospace;
+}
+
+/* SEKCJA GRY */
+.sekcja-gry {
+    padding: 80px 20px;
+    text-align: center;
+    background-color: #f7fafc;
+    border-top: 1px solid #e2e8f0;
+}
+
+.sekcja-gry h2 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    color: #1a202c;
+}
+
+.gra-kontener {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+}
+
+.opcje-gry {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.tryb-wybor,
+.poziom-wybor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.opcja-etykieta {
+    font-weight: bold;
+    color: #4a5568;
+    margin-right: 5px;
+}
+
+.btn-opcja,
+.btn-poziom {
+    padding: 8px 16px;
+    border: 1px solid #cbd5e0;
+    background-color: #f7fafc;
+    color: #4a5568;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.btn-opcja:hover,
+.btn-poziom:hover {
+    background-color: #e2e8f0;
+}
+
+.btn-opcja.aktywny,
+.btn-poziom.aktywny {
+    background-color: #2b6cb0;
+    color: #ffffff;
+    border-color: #2b6cb0;
+}
+
+.status-gry {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 25px;
+    color: #2b6cb0;
+}
+
+.plansza {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    max-width: 350px;
+    margin: 0 auto 30px auto;
+}
+
+.komorka {
+    aspect-ratio: 1;
+    background-color: #edf2f7;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
+    font-weight: bold;
+    color: #2d3748;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.komorka:hover:not(.zajeta) {
+    background-color: #e2e8f0;
+}
+
+.komorka:active:not(.zajeta) {
+    transform: scale(0.95);
+}
+
+.komorka.zajeta {
+    cursor: not-allowed;
+}
+
+.komorka.wygrana {
+    background-color: #c6f6d5;
+    color: #22543d;
+}
+
+#btn-restart {
+    margin-top: 10px;
+}
+
+/* MINI NAGŁÓWEK (dla osobnej strony gry, gra.html) === */
+.mini-naglowek {
+    height: auto;
+    min-height: auto;
+    padding: 60px 20px 40px;
+}
+
+/* STOPKA */
+footer {
+    text-align: center;
+    padding: 30px;
+    background-color: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    color: #718096;
+}
+
+/* PRZYCISK SCROLLOWANIA NA GÓRĘ */
+.btn-do-gory {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #2b6cb0;
+    color: #ffffff;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s, background-color 0.3s;
+    z-index: 999;
+    box-shadow: 0 4px 12px rgba(43, 108, 176, 0.3);
+    font-family: inherit;
+    line-height: 1;
+}
+
+.btn-do-gory:hover {
+    background-color: #2c5282;
+    transform: translateY(-3px);
+}
+
+.btn-do-gory.widoczny {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* RWD */
+
+/* Tablet (max-width: 640px) */
+@media (max-width: 640px) {
+
+    /* Nawigacja - hamburger zamiast menu */
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: #ffffff;
+        flex-direction: column;
+        padding: 10px 20px 20px;
+        border-bottom: 1px solid #e2e8f0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        gap: 0;
+    }
+
+    .nav-menu.otwarte {
+        display: flex;
+    }
+
+    .nav-link {
+        padding: 12px 18px;
+        border-radius: 8px;
+        width: 100%;
+        text-align: left;
+    }
+
+    .powitanie h1 {
+        font-size: 2.2rem;
+    }
+
+    .podtytul {
+        font-size: 1rem;
+    }
+
+    .opis {
+        font-size: 1rem;
+    }
+
+    /* Technologie */
+    .sekcja-technologii {
+        padding: 60px 20px;
+    }
+
+    .sekcja-technologii h2 {
+        font-size: 1.7rem;
+        margin-bottom: 30px;
+    }
+
+    .kontener-kafelkow {
+        gap: 20px;
+    }
+
+    .kafelek {
+        min-width: 200px;
+    }
+
+    /* Gra */
+    .sekcja-gry {
+        padding: 60px 20px;
+    }
+
+    .sekcja-gry h2 {
+        font-size: 1.7rem;
+        margin-bottom: 30px;
+    }
+
+    .komorka {
+        font-size: 3rem;
+    }
+
+    .status-gry {
+        font-size: 1.3rem;
+    }
+
+    /* Mniejszy przycisk do scrollowania do góry */
+    .btn-do-gory {
+        width: 45px;
+        height: 45px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 1.2rem;
+    }
+}
+
+/* Telefon (max-width: 480px) */
+@media (max-width: 480px) {
+
+    .powitanie {
+        padding: 30px 15px;
+    }
+
+    .powitanie h1 {
+        font-size: 1.8rem;
+    }
+
+    .podtytul {
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+    }
+
+    .opis {
+        font-size: 0.9rem;
+        margin-bottom: 30px;
+    }
+
+    .przycisk {
+        padding: 12px 24px;
+        font-size: 0.9rem;
+    }
+
+    .sekcja-technologii {
+        padding: 50px 15px;
+    }
+
+    .sekcja-technologii h2 {
+        font-size: 1.5rem;
+    }
+
+    .kontener-kafelkow {
+        gap: 15px;
+    }
+
+    .kafelek {
+        min-width: 100%;
+        padding: 20px;
+    }
+
+    .kafelek:hover {
+        transform: translateY(-5px);
+    }
+
+    .sekcja-gry {
+        padding: 50px 15px;
+    }
+
+    .sekcja-gry h2 {
+        font-size: 1.5rem;
+    }
+
+    .gra-kontener {
+        padding: 20px 15px;
+    }
+
+    .plansza {
+        max-width: 280px;
+        gap: 8px;
+    }
+
+    .komorka {
+        font-size: 2.5rem;
+    }
+
+    .status-gry {
+        font-size: 1.1rem;
+    }
+
+    .tryb-wybor,
+    .poziom-wybor {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .opcja-etykieta {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+
+    footer {
+        padding: 20px 15px;
+        font-size: 0.85rem;
+    }
+}
