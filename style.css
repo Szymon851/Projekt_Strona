@@ -245,135 +245,7 @@ code {
     font-family: monospace;
 }
 
-/* SEKCJA GRY */
-.sekcja-gry {
-    padding: 80px 20px;
-    text-align: center;
-    background-color: #f7fafc;
-    border-top: 1px solid #e2e8f0;
-}
 
-.sekcja-gry h2 {
-    font-size: 2rem;
-    margin-bottom: 40px;
-    color: #1a202c;
-}
-
-.gra-kontener {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 30px 20px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    border: 1px solid #e2e8f0;
-}
-
-.opcje-gry {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-bottom: 30px;
-}
-
-.tryb-wybor,
-.poziom-wybor {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.opcja-etykieta {
-    font-weight: bold;
-    color: #4a5568;
-    margin-right: 5px;
-}
-
-.btn-opcja,
-.btn-poziom {
-    padding: 8px 16px;
-    border: 1px solid #cbd5e0;
-    background-color: #f7fafc;
-    color: #4a5568;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: all 0.2s;
-    font-family: inherit;
-}
-
-.btn-opcja:hover,
-.btn-poziom:hover {
-    background-color: #e2e8f0;
-}
-
-.btn-opcja.aktywny,
-.btn-poziom.aktywny {
-    background-color: #2b6cb0;
-    color: #ffffff;
-    border-color: #2b6cb0;
-}
-
-.status-gry {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 25px;
-    color: #2b6cb0;
-}
-
-.plansza {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    max-width: 350px;
-    margin: 0 auto 30px auto;
-}
-
-.komorka {
-    aspect-ratio: 1;
-    background-color: #edf2f7;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 4rem;
-    font-weight: bold;
-    color: #2d3748;
-    cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s;
-    -webkit-user-select: none;
-    user-select: none;
-}
-
-.komorka:hover:not(.zajeta) {
-    background-color: #e2e8f0;
-}
-
-.komorka:active:not(.zajeta) {
-    transform: scale(0.95);
-}
-
-.komorka.zajeta {
-    cursor: not-allowed;
-}
-
-.komorka.wygrana {
-    background-color: #c6f6d5;
-    color: #22543d;
-}
-
-#btn-restart {
-    margin-top: 10px;
-}
-
-/* MINI NAGŁÓWEK (dla osobnej strony gry, gra.html) === */
-.mini-naglowek {
-    height: auto;
-    min-height: auto;
-    padding: 60px 20px 40px;
-}
 
 /* STOPKA */
 footer {
@@ -481,23 +353,7 @@ footer {
         min-width: 200px;
     }
 
-    /* Gra */
-    .sekcja-gry {
-        padding: 60px 20px;
-    }
 
-    .sekcja-gry h2 {
-        font-size: 1.7rem;
-        margin-bottom: 30px;
-    }
-
-    .komorka {
-        font-size: 3rem;
-    }
-
-    .status-gry {
-        font-size: 1.3rem;
-    }
 
     /* Mniejszy przycisk do scrollowania do góry */
     .btn-do-gory {
@@ -556,41 +412,7 @@ footer {
         transform: translateY(-5px);
     }
 
-    .sekcja-gry {
-        padding: 50px 15px;
-    }
 
-    .sekcja-gry h2 {
-        font-size: 1.5rem;
-    }
-
-    .gra-kontener {
-        padding: 20px 15px;
-    }
-
-    .plansza {
-        max-width: 280px;
-        gap: 8px;
-    }
-
-    .komorka {
-        font-size: 2.5rem;
-    }
-
-    .status-gry {
-        font-size: 1.1rem;
-    }
-
-    .tryb-wybor,
-    .poziom-wybor {
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .opcja-etykieta {
-        margin-right: 0;
-        margin-bottom: 5px;
-    }
 
     footer {
         padding: 20px 15px;

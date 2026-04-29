@@ -72,4 +72,93 @@ document.addEventListener('DOMContentLoaded', function () {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
+    /* Konfiguracja API */
+    const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+        ? 'http://localhost:3000'
+        : 'https://link.onrender.com';
+
+    const configForm = document.getElementById('configurator-form');
+    if (configForm) {
+        let powerChartInstance = null; // Przechowuje wykres
+
+        configForm.addEventListener('submit', async function (e) {
+            e.preventDefault(); // Zapobiega przeładowaniu strony
+
+            const cpu = document.getElementById('cpu-select').value;
+            const gpu = document.getElementById('gpu-select').value;
+            const ram = document.getElementById('ram-select').value;
+
+            // Zmiana tekstu przycisku na czas ładowania
+            const submitBtn = configForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.textContent = 'Analizowanie...';
+            submitBtn.disabled = true;
+
+            try {
+                // Asynchroniczne wywołanie API serwera
+                const response = await fetch(`${API_URL}/api/calculate`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ cpu, gpu, ram })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Błąd serwera. Sprawdź, czy serwer backendowy jest uruchomiony.');
+                }
+
+                const result = await response.json();
+
+                if (result.success) {
+                    const data = result.data.stats;
+                    const chartData = result.data.chartData;
+
+                    // Aktualizacja danych
+                    document.getElementById('res-power').textContent = data.totalPower;
+                    document.getElementById('res-psu').textContent = data.recommendedPSU;
+                    document.getElementById('res-perf').textContent = data.performanceScore;
+                    document.getElementById('res-bottleneck').textContent = data.bottleneck;
+                    document.getElementById('res-price').textContent = data.totalPrice;
+
+                    document.getElementById('config-results').style.display = 'block';
+
+                    // Aktualizacja wykresu
+                    const ctx = document.getElementById('powerChart').getContext('2d');
+
+                    if (powerChartInstance) {
+                        powerChartInstance.destroy(); // Usuwa stary wykres
+                    }
+
+                    powerChartInstance = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: chartData,
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'bottom',
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Podział poboru mocy'
+                                }
+                            }
+                        }
+                    });
+                } else {
+                    alert('Błąd podczas przetwarzania danych: ' + result.message);
+                }
+
+            } catch (error) {
+                console.error('Błąd Fetch API:', error);
+                alert('Nie udało się połączyć z serwerem. Upewnij się, że uruchomiłeś backend na porcie 3000!\n\nSzczegóły: ' + error.message);
+            } finally {
+                // Przywrócenie przycisku do stanu pierwotnego
+                submitBtn.textContent = originalBtnText;
+                submitBtn.disabled = false;
+            }
+        });
+    }
+
 });

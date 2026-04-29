@@ -25,7 +25,7 @@
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="#powitanie" class="nav-link aktywny">Start</a></li>
                 <li><a href="#technologie" class="nav-link">Technologie</a></li>
-                <li><a href="#gra" class="nav-link">Gra</a></li>
+                <li><a href="#konfigurator" class="nav-link">Konfigurator PC</a></li>
             </ul>
         </div>
     </nav>
@@ -66,52 +66,80 @@
                         elastyczny i sam dostosowuje się do ekranu.</p>
                 </article>
 
-                <article class="kafelek">
-                    <h3>Gra w JS</h3>
-                    <p>Zaimplementowana w czystym JS gra w &quot;kółko i krzyżyk&quot; z trzema wariantami trudności dla
-                        trybu jednoosobowego oraz trybem dla dwóch graczy.</p>
-                    <div class="kafelek-akcja">
-                        <a href="#gra" class="przycisk przycisk-maly">Zagraj teraz</a>
-                    </div>
-                </article>
             </div>
         </section>
 
-        <!-- Sekcja z grą -->
-        <section id="gra" class="sekcja-gry">
-            <h2>Kółko i krzyżyk</h2>
+        <!-- Sekcja Konfiguratora PC -->
+        <section id="konfigurator" class="sekcja-technologii">
+            <h2>Konfigurator PC</h2>
+            <p style="margin-bottom: 20px; color: #718096;">
+                Wybierz podzespoły. Po kliknięciu "Analizuj zestaw", dane zostaną asynchronicznie wysłane do serwera
+                (Kontrolera). Serwer przetworzy dane (Model) i zwróci wyniki. Widok zaktualizuje dane i wygeneruje
+                wykres bez przeładowania strony.
+            </p>
 
-            <div class="gra-kontener">
-                <div class="opcje-gry">
-                    <div class="tryb-wybor">
-                        <span class="opcja-etykieta">Tryb gry:</span>
-                        <button class="btn-opcja aktywny" id="btn-1osoba" type="button">1 Gracz</button>
-                        <button class="btn-opcja" id="btn-2osoby" type="button">2 Graczy</button>
+            <div class="gra-kontener" style="max-width: 800px;">
+                <form id="configurator-form" class="opcje-gry" style="text-align: left;">
+                    <div style="margin-bottom: 15px;">
+                        <label for="cpu-select"
+                            style="display: block; margin-bottom: 5px; font-weight: bold; color: #4a5568;">Procesor
+                            (CPU):</label>
+                        <select id="cpu-select" name="cpu"
+                            style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #cbd5e0; font-family: inherit;">
+                            <option value="i5-12400f">Intel Core i5-12400F</option>
+                            <option value="i7-13700k">Intel Core i7-13700K</option>
+                            <option value="r5-5600x">AMD Ryzen 5 5600X</option>
+                            <option value="r7-7800x3d">AMD Ryzen 7 7800X3D</option>
+                        </select>
                     </div>
 
-                    <div class="poziom-wybor" id="poziom-kontener">
-                        <span class="opcja-etykieta">Poziom trudności:</span>
-                        <button class="btn-poziom" data-poziom="1" type="button">Łatwy</button>
-                        <button class="btn-poziom aktywny" data-poziom="2" type="button">Średni</button>
-                        <button class="btn-poziom" data-poziom="3" type="button">Trudny</button>
+                    <div style="margin-bottom: 15px;">
+                        <label for="gpu-select"
+                            style="display: block; margin-bottom: 5px; font-weight: bold; color: #4a5568;">Karta
+                            graficzna (GPU):</label>
+                        <select id="gpu-select" name="gpu"
+                            style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #cbd5e0; font-family: inherit;">
+                            <option value="rtx-3060">NVIDIA RTX 3060</option>
+                            <option value="rtx-4070">NVIDIA RTX 4070</option>
+                            <option value="rx-6700xt">AMD RX 6700 XT</option>
+                            <option value="rx-7900xtx">AMD RX 7900 XTX</option>
+                            <option value="none">Brak (Zintegrowana)</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 25px;">
+                        <label for="ram-select"
+                            style="display: block; margin-bottom: 5px; font-weight: bold; color: #4a5568;">Pamięć
+                            RAM:</label>
+                        <select id="ram-select" name="ram"
+                            style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #cbd5e0; font-family: inherit;">
+                            <option value="16gb-ddr4">16GB DDR4 3200MHz</option>
+                            <option value="32gb-ddr4">32GB DDR4 3600MHz</option>
+                            <option value="32gb-ddr5">32GB DDR5 6000MHz</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="przycisk" style="width: 100%;">Analizuj zestaw na serwerze</button>
+                </form>
+
+                <!-- Wyniki zwracane z serwera -->
+                <div id="config-results"
+                    style="display: none; margin-top: 30px; text-align: left; padding-top: 20px; border-top: 1px solid #e2e8f0;">
+                    <h3 style="color: #2b6cb0; margin-bottom: 15px;">Wyniki analizy serwera:</h3>
+                    <ul style="list-style-type: none; margin-bottom: 20px; line-height: 1.8; color: #4a5568;">
+                        <li><strong>Szacowany pobór mocy:</strong> <span id="res-power">-</span> W</li>
+                        <li><strong>Zalecany zasilacz:</strong> <span id="res-psu">-</span> W</li>
+                        <li><strong>Ocena wydajności (0-100):</strong> <span id="res-perf">-</span></li>
+                        <li><strong>Uwagi (Bottleneck):</strong> <span id="res-bottleneck"
+                                style="color: #e53e3e; font-weight: bold;">-</span></li>
+                        <li><strong>Szacunkowa cena komponentów:</strong> <span id="res-price">-</span> PLN</li>
+                    </ul>
+
+                    <!-- Wykres z Chart.js -->
+                    <div style="max-width: 400px; margin: 0 auto;">
+                        <canvas id="powerChart"></canvas>
                     </div>
                 </div>
-
-                <div class="status-gry" id="status">Kolej gracza: X</div>
-
-                <div class="plansza" id="plansza">
-                    <div class="komorka" data-indeks="0"></div>
-                    <div class="komorka" data-indeks="1"></div>
-                    <div class="komorka" data-indeks="2"></div>
-                    <div class="komorka" data-indeks="3"></div>
-                    <div class="komorka" data-indeks="4"></div>
-                    <div class="komorka" data-indeks="5"></div>
-                    <div class="komorka" data-indeks="6"></div>
-                    <div class="komorka" data-indeks="7"></div>
-                    <div class="komorka" data-indeks="8"></div>
-                </div>
-
-                <button id="btn-restart" class="przycisk" type="button">Zagraj ponownie</button>
             </div>
         </section>
     </main>
@@ -123,7 +151,9 @@
     <!-- Przycisk przewinięcia do góry -->
     <button id="btn-do-gory" class="btn-do-gory" type="button" aria-label="Przewiń do góry">&#8593;</button>
 
-    <script src="gra.js"></script>
+    <!-- Dołączenie biblioteki Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script src="main.js"></script>
 
 </body>
