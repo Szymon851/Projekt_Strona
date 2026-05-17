@@ -208,7 +208,7 @@ app.post('/api/order', (req, res) => {
         phoneHash: phoneHash,
         configJSON: JSON.stringify(config)
     }).then(() => {
-        res.json({ success: true, message: 'Zamówienie zapisane w bazie! Potwierdzenie na: ' + email });
+        res.json({ success: true, message: 'Zamówienie zapisane w bazie! Potwierdzenie wysłane na: ' + email });
     }).catch(err => {
         res.status(500).json({ success: false, message: 'Błąd bazy danych.' });
     });

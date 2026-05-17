@@ -77,7 +77,8 @@
                 <div class="configurator__grid">
 
                     <article class="card card--component" id="card-cpu">
-                        <button type="button" class="card__reset" data-target="cpu-select" aria-label="Wyczyść">&#10006;</button>
+                        <button type="button" class="card__reset" data-target="cpu-select"
+                            aria-label="Wyczyść">&#10006;</button>
                         <div class="card__icon">🔲</div>
                         <h3 class="card__title">Procesor (CPU)</h3>
                         <select id="cpu-select" class="select" name="cpu">
@@ -87,7 +88,8 @@
                     </article>
 
                     <article class="card card--component" id="card-mobo">
-                        <button type="button" class="card__reset" data-target="mobo-select" aria-label="Wyczyść">&#10006;</button>
+                        <button type="button" class="card__reset" data-target="mobo-select"
+                            aria-label="Wyczyść">&#10006;</button>
                         <div class="card__icon">🖥️</div>
                         <h3 class="card__title">Płyta główna</h3>
                         <select id="mobo-select" class="select" name="mobo">
@@ -97,7 +99,8 @@
                     </article>
 
                     <article class="card card--component" id="card-gpu">
-                        <button type="button" class="card__reset" data-target="gpu-select" aria-label="Wyczyść">&#10006;</button>
+                        <button type="button" class="card__reset" data-target="gpu-select"
+                            aria-label="Wyczyść">&#10006;</button>
                         <div class="card__icon">🎮</div>
                         <h3 class="card__title">Karta graficzna (GPU)</h3>
                         <select id="gpu-select" class="select" name="gpu">
@@ -107,7 +110,8 @@
                     </article>
 
                     <article class="card card--component" id="card-ram">
-                        <button type="button" class="card__reset" data-target="ram-select" aria-label="Wyczyść">&#10006;</button>
+                        <button type="button" class="card__reset" data-target="ram-select"
+                            aria-label="Wyczyść">&#10006;</button>
                         <div class="card__icon">💾</div>
                         <h3 class="card__title">Pamięć RAM</h3>
                         <select id="ram-select" class="select" name="ram">
@@ -117,7 +121,8 @@
                     </article>
 
                     <article class="card card--component" id="card-storage">
-                        <button type="button" class="card__reset" data-target="storage-select" aria-label="Wyczyść">&#10006;</button>
+                        <button type="button" class="card__reset" data-target="storage-select"
+                            aria-label="Wyczyść">&#10006;</button>
                         <div class="card__icon">💿</div>
                         <h3 class="card__title">Dysk</h3>
                         <select id="storage-select" class="select" name="storage">
@@ -126,7 +131,8 @@
                     </article>
 
                     <article class="card card--component" id="card-cooling">
-                        <button type="button" class="card__reset" data-target="cooling-select" aria-label="Wyczyść">&#10006;</button>
+                        <button type="button" class="card__reset" data-target="cooling-select"
+                            aria-label="Wyczyść">&#10006;</button>
                         <div class="card__icon">❄️</div>
                         <h3 class="card__title">Chłodzenie CPU</h3>
                         <select id="cooling-select" class="select" name="cooling">
@@ -136,7 +142,8 @@
                     </article>
 
                     <article class="card card--component" id="card-case">
-                        <button type="button" class="card__reset" data-target="case-select" aria-label="Wyczyść">&#10006;</button>
+                        <button type="button" class="card__reset" data-target="case-select"
+                            aria-label="Wyczyść">&#10006;</button>
                         <div class="card__icon">🏗️</div>
                         <h3 class="card__title">Obudowa</h3>
                         <select id="case-select" class="select" name="case">
@@ -146,7 +153,8 @@
                     </article>
 
                     <article class="card card--component" id="card-psu">
-                        <button type="button" class="card__reset" data-target="psu-select" aria-label="Wyczyść">&#10006;</button>
+                        <button type="button" class="card__reset" data-target="psu-select"
+                            aria-label="Wyczyść">&#10006;</button>
                         <div class="card__icon">🔌</div>
                         <h3 class="card__title">Zasilacz (PSU)</h3>
                         <select id="psu-select" class="select" name="psu">
@@ -195,7 +203,8 @@
                     <div class="summary__warnings" id="live-warnings"></div>
                 </aside>
 
-                <div class="configurator__actions" style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                <div class="configurator__actions"
+                    style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
                     <button type="button" class="btn btn--secondary" id="btn-reset-all">
                         Wyczyść zestaw &#10006;
                     </button>
@@ -262,7 +271,8 @@
                     Złóż zamówienie &#10003;
                 </button>
                 <p style="font-size: 0.75rem; color: #64748b; text-align: center; margin-top: 10px;">
-                    Administratorem Twoich danych osobowych jest PC Builder. Dane podane w formularzu będą przetwarzane wyłącznie w celu realizacji zamówienia. 
+                    Administratorem Twoich danych osobowych jest PC Builder. Dane podane w formularzu będą przetwarzane
+                    wyłącznie w celu realizacji zamówienia.
                 </p>
                 <div class="order-confirmation" id="order-confirmation"></div>
             </form>
@@ -270,10 +280,10 @@
 
         <section id="gra" class="section spa-view">
             <h2 class="section__title">Gra - Kółko i krzyżyk</h2>
-            <p class="section__subtitle">Wymagany w projekcie element interaktywny (Zagraj z zaawansowanym Botem!).</p>
+            <p class="section__subtitle">Zagraj z botem (3 poziomy trudności) lub ze znajomym.</p>
             <div class="card game-container" style="max-width: 450px; margin: 0 auto; text-align: center;">
                 <div style="display:flex; justify-content:center; gap:10px; margin-bottom:15px;">
-                    <button class="btn btn--secondary aktywny" id="btn-1osoba">1 Gracz (Bot)</button>
+                    <button class="btn btn--secondary aktywny" id="btn-1osoba">1 Gracz (vs Bot)</button>
                     <button class="btn btn--secondary" id="btn-2osoby">2 Graczy</button>
                 </div>
                 <div id="poziom-kontener" style="display:flex; justify-content:center; gap:5px; margin-bottom:15px;">
@@ -363,7 +373,7 @@
     </main>
 
     <footer class="footer">
-        <p>&copy; 2026 Programowanie w Internecie &bull; Szymon Świeboda (s223412) &bull; SGGW</p>
+        <p>&copy; 2026 Programowanie w Internecie &bull; Szymon Świeboda (s223412)</p>
     </footer>
 
     <button id="btn-top" class="btn-top" type="button" aria-label="Przewiń do góry">&#8593;</button>
