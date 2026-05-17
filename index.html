@@ -16,7 +16,7 @@
 
     <nav id="nawigacja" class="nav" aria-label="Nawigacja główna">
         <div class="nav__container">
-            <a href="#hero" class="nav__logo">PC Builder</a>
+            <a href="#hero" class="nav__logo nav__link" data-section="hero">PC Builder</a>
             <button class="nav__hamburger" id="hamburger" type="button" aria-label="Otwórz menu" aria-expanded="false"
                 aria-controls="nav-menu">
                 <span class="nav__hamburger-line"></span>
@@ -199,20 +199,8 @@
                     <h3 class="results__title">Wyniki analizy serwera</h3>
                     <div class="results__grid">
                         <div class="results__item">
-                            <span class="results__label">Pobór mocy</span>
-                            <span class="results__value" id="res-power">—</span>
-                        </div>
-                        <div class="results__item">
-                            <span class="results__label">Zalecany PSU</span>
-                            <span class="results__value" id="res-psu">—</span>
-                        </div>
-                        <div class="results__item">
-                            <span class="results__label">Wydajność</span>
+                            <span class="results__label">Wydajność zestawu</span>
                             <span class="results__value" id="res-perf">—</span>
-                        </div>
-                        <div class="results__item">
-                            <span class="results__label">Cena</span>
-                            <span class="results__value" id="res-price">—</span>
                         </div>
                     </div>
                     <p class="results__bottleneck" id="res-bottleneck"></p>
@@ -224,6 +212,7 @@
                         <div id="power-legend"
                             style="display:flex; justify-content:center; gap: 15px; font-size: 0.9rem;"></div>
                     </div>
+                    <div class="results__suggestion" id="bottleneck-suggestion"></div>
                 </div>
             </div>
         </section>

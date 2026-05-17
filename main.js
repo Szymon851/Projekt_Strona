@@ -476,10 +476,10 @@ document.addEventListener('DOMContentLoaded', function () {
         var gpu = selectors.gpu.value;
         var ram = selectors.ram.value;
         if (!cpu || !gpu || !ram) {
-            alert('Wybierz przynajmniej CPU, GPU i RAM przed analizą.');
+            alert('Wybierz przynajmniej CPU, GPU i RAM przed analiz\u0105.');
             return;
         }
-        btnAnalyze.textContent = 'Analizowanie…';
+        btnAnalyze.textContent = 'Analizowanie\u2026';
         btnAnalyze.disabled = true;
         try {
             var res = await fetch(API_URL + '/api/calculate', {
@@ -500,10 +500,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var json = await res.json();
             if (json.success) {
                 var d = json.data;
-                document.getElementById('res-power').textContent = d.stats.totalPower + ' W';
-                document.getElementById('res-psu').textContent = d.stats.recommendedPSU + ' W';
                 document.getElementById('res-perf').textContent = d.stats.performanceScore + '/100';
-                document.getElementById('res-price').textContent = d.stats.totalPrice + ' PLN';
                 var bnEl = document.getElementById('res-bottleneck');
                 bnEl.textContent = d.stats.bottleneck;
                 bnEl.className = 'results__bottleneck ' + (d.stats.bottleneck.includes('zbalansowany') ? 'balanced' : 'warning');
@@ -520,14 +517,150 @@ document.addEventListener('DOMContentLoaded', function () {
                     pb.innerHTML += '<div style="width:' + pct + '; background:' + colors[i] + '; display:flex; align-items:center; justify-content:center; color:white; font-size:11px;" title="' + label + ': ' + val + 'W">' + val + 'W</div>';
                     pl.innerHTML += '<div style="display:flex; align-items:center; gap:5px;"><span style="display:inline-block; width:12px; height:12px; background:' + colors[i] + '; border-radius:3px;"></span>' + label + '</div>';
                 });
-            } else { alert('Błąd: ' + json.message); }
+
+                // Bottleneck suggestion
+                generateBottleneckSuggestion(cpu, gpu);
+            } else { alert('B\u0142\u0105d: ' + json.message); }
         } catch (err) {
-            alert('Nie udało się połączyć z serwerem.\n' + err.message);
+            alert('Nie uda\u0142o si\u0119 po\u0142\u0105czy\u0107 z serwerem.\n' + err.message);
         } finally {
-            btnAnalyze.textContent = 'Analizuj na serwerze ⚡';
+            btnAnalyze.textContent = 'Analizuj na serwerze \u26A1';
             btnAnalyze.disabled = false;
         }
     });
+
+    // SUGESTIA ZAMIENNIKA DLA BOTTLENECKA
+    function generateBottleneckSuggestion(cpuId, gpuId) {
+        var suggestionEl = document.getElementById('bottleneck-suggestion');
+        suggestionEl.innerHTML = '';
+        var cpuData = PARTS.cpu[cpuId];
+        var gpuData = PARTS.gpu[gpuId];
+        if (!cpuData || !gpuData) return;
+
+        var cpuPerf = cpuData.perf;
+        var gpuPerf = gpuData.perf;
+        var diff = Math.abs(cpuPerf - gpuPerf);
+
+        // No bottleneck
+        if (diff <= 20) {
+            suggestionEl.innerHTML = '<div class="suggestion suggestion--balanced">' +
+                '<div class="suggestion__icon">\u2705</div>' +
+                '<div class="suggestion__content">' +
+                '<h4 class="suggestion__title">Zestaw zbalansowany</h4>' +
+                '<p class="suggestion__desc">Tw\u00f3j procesor i karta graficzna s\u0105 dobrze dobrane \u2014 brak bottlenecka.</p>' +
+                '</div></div>';
+            return;
+        }
+
+        // Current total price for reference
+        var currentTotalPrice = 0;
+        var currentCpuData = PARTS.cpu[selectors.cpu.value];
+        var currentGpuData = PARTS.gpu[selectors.gpu.value];
+        Object.keys(selectors).forEach(function (key) {
+            var val = selectors[key].value;
+            if (key === 'psu') {
+                var psuPrices = { 400: 150, 500: 200, 550: 280, 650: 350, 750: 500, 850: 550, 1000: 700, 1200: 900 };
+                if (val && psuPrices[parseInt(val)]) currentTotalPrice += psuPrices[parseInt(val)];
+            } else {
+                var catMap = { cpu: 'cpu', mobo: 'mobo', gpu: 'gpu', ram: 'ram', storage: 'storage', cooling: 'cooling', pcCase: 'pcCase' };
+                var cat = catMap[key];
+                if (cat && PARTS[cat] && PARTS[cat][val]) {
+                    currentTotalPrice += PARTS[cat][val].price;
+                }
+            }
+        });
+
+        if (cpuPerf > gpuPerf + 20) {
+            // GPU bottleneck - suggest better GPU
+            var bestMatch = null;
+            var bestDiff = Infinity;
+            Object.keys(PARTS.gpu).forEach(function (id) {
+                if (id === 'none') return;
+                var g = PARTS.gpu[id];
+                var d = Math.abs(cpuPerf - g.perf);
+                if (d < bestDiff || (d === bestDiff && g.price < (bestMatch ? bestMatch.price : Infinity))) {
+                    bestDiff = d;
+                    bestMatch = { id: id, name: g.name, perf: g.perf, price: g.price };
+                }
+            });
+            if (bestMatch && bestMatch.id !== gpuId) {
+                var priceDiff = bestMatch.price - gpuData.price;
+                var newTotalPrice = currentTotalPrice - gpuData.price + bestMatch.price;
+                suggestionEl.innerHTML = '<div class="suggestion suggestion--upgrade">' +
+                    '<div class="suggestion__icon">\uD83D\uDD27</div>' +
+                    '<div class="suggestion__content">' +
+                    '<h4 class="suggestion__title">Proponowany zamiennik GPU</h4>' +
+                    '<p class="suggestion__desc">Tw\u00f3j procesor (<strong>' + cpuData.name + '</strong>, ' + cpuPerf + ' pkt) znacznie przewy\u017Csza kart\u0119 graficzn\u0105 (<strong>' + gpuData.name + '</strong>, ' + gpuPerf + ' pkt).</p>' +
+                    '<div class="suggestion__replacement">' +
+                    '<div class="suggestion__arrow">\u27A1</div>' +
+                    '<div class="suggestion__new-part">' +
+                    '<span class="suggestion__part-name">' + bestMatch.name + '</span>' +
+                    '<span class="suggestion__part-perf">Wydajno\u015b\u0107: ' + bestMatch.perf + ' pkt</span>' +
+                    '</div></div>' +
+                    '<div class="suggestion__price-info">' +
+                    '<span class="suggestion__price-diff ' + (priceDiff > 0 ? 'price-up' : 'price-down') + '">' +
+                    (priceDiff > 0 ? '+' : '') + priceDiff + ' PLN</span>' +
+                    '<span class="suggestion__price-total">Nowa cena zestawu: <strong>' + newTotalPrice + ' PLN</strong></span>' +
+                    '</div>' +
+                    '<button type="button" class="btn btn--primary btn--suggestion" data-swap-type="gpu" data-swap-id="' + bestMatch.id + '">Zamie\u0144 GPU \u21BB</button>' +
+                    '</div></div>';
+            }
+        } else if (gpuPerf > cpuPerf + 20) {
+            // CPU bottleneck - suggest better CPU
+            var bestMatch = null;
+            var bestDiff = Infinity;
+            Object.keys(PARTS.cpu).forEach(function (id) {
+                var c = PARTS.cpu[id];
+                // Only suggest CPUs with same socket as currently selected mobo (if any)
+                var selectedMobo = PARTS.mobo[selectors.mobo.value];
+                if (selectedMobo && c.socket !== selectedMobo.socket) return;
+                var d = Math.abs(gpuPerf - c.perf);
+                if (d < bestDiff || (d === bestDiff && c.price < (bestMatch ? bestMatch.price : Infinity))) {
+                    bestDiff = d;
+                    bestMatch = { id: id, name: c.name, perf: c.perf, price: c.price };
+                }
+            });
+            if (bestMatch && bestMatch.id !== cpuId) {
+                var priceDiff = bestMatch.price - cpuData.price;
+                var newTotalPrice = currentTotalPrice - cpuData.price + bestMatch.price;
+                suggestionEl.innerHTML = '<div class="suggestion suggestion--upgrade">' +
+                    '<div class="suggestion__icon">\uD83D\uDD27</div>' +
+                    '<div class="suggestion__content">' +
+                    '<h4 class="suggestion__title">Proponowany zamiennik CPU</h4>' +
+                    '<p class="suggestion__desc">Twoja karta graficzna (<strong>' + gpuData.name + '</strong>, ' + gpuPerf + ' pkt) znacznie przewy\u017Csza procesor (<strong>' + cpuData.name + '</strong>, ' + cpuPerf + ' pkt).</p>' +
+                    '<div class="suggestion__replacement">' +
+                    '<div class="suggestion__arrow">\u27A1</div>' +
+                    '<div class="suggestion__new-part">' +
+                    '<span class="suggestion__part-name">' + bestMatch.name + '</span>' +
+                    '<span class="suggestion__part-perf">Wydajno\u015b\u0107: ' + bestMatch.perf + ' pkt</span>' +
+                    '</div></div>' +
+                    '<div class="suggestion__price-info">' +
+                    '<span class="suggestion__price-diff ' + (priceDiff > 0 ? 'price-up' : 'price-down') + '">' +
+                    (priceDiff > 0 ? '+' : '') + priceDiff + ' PLN</span>' +
+                    '<span class="suggestion__price-total">Nowa cena zestawu: <strong>' + newTotalPrice + ' PLN</strong></span>' +
+                    '</div>' +
+                    '<button type="button" class="btn btn--primary btn--suggestion" data-swap-type="cpu" data-swap-id="' + bestMatch.id + '">Zamie\u0144 CPU \u21BB</button>' +
+                    '</div></div>';
+            }
+        }
+
+        // Attach swap button handler
+        var swapBtn = suggestionEl.querySelector('.btn--suggestion');
+        if (swapBtn) {
+            swapBtn.addEventListener('click', function () {
+                var swapType = this.getAttribute('data-swap-type');
+                var swapId = this.getAttribute('data-swap-id');
+                if (swapType === 'gpu') {
+                    selectors.gpu.value = swapId;
+                } else if (swapType === 'cpu') {
+                    selectors.cpu.value = swapId;
+                }
+                applyFilters();
+                // Re-run analysis
+                btnAnalyze.click();
+            });
+        }
+    }
 
     // WALIDACJA FORMULARZA
     var REGEX = {

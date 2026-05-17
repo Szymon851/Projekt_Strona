@@ -53,6 +53,11 @@ body {
     color: #8b83ff;
 }
 
+.nav__logo.nav__link.active,
+.nav__logo.nav__link:hover {
+    background: none;
+}
+
 .nav__menu {
     list-style: none;
     display: flex;
@@ -573,6 +578,140 @@ header.spa-view.active {
 .results__chart {
     max-width: 380px;
     margin: 0 auto;
+}
+
+/* SUGESTIA ZAMIENNIKA BOTTLENECK */
+.results__suggestion {
+    margin-top: 24px;
+}
+
+.suggestion {
+    display: flex;
+    gap: 20px;
+    padding: 24px;
+    border-radius: 14px;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.suggestion--balanced {
+    background: rgba(52, 211, 153, 0.08);
+    border: 1px solid rgba(52, 211, 153, 0.25);
+}
+
+.suggestion--upgrade {
+    background: rgba(251, 191, 36, 0.06);
+    border: 1px solid rgba(251, 191, 36, 0.2);
+}
+
+.suggestion__icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: 2px;
+}
+
+.suggestion__content {
+    flex: 1;
+}
+
+.suggestion__title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #e2e8f0;
+    margin-bottom: 8px;
+}
+
+.suggestion--balanced .suggestion__title {
+    color: #34d399;
+}
+
+.suggestion--upgrade .suggestion__title {
+    color: #fbbf24;
+}
+
+.suggestion__desc {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.suggestion__desc strong {
+    color: #e2e8f0;
+}
+
+.suggestion__replacement {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    background: rgba(108, 99, 255, 0.08);
+    border: 1px solid rgba(108, 99, 255, 0.2);
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+
+.suggestion__arrow {
+    font-size: 1.5rem;
+    color: #6c63ff;
+    flex-shrink: 0;
+}
+
+.suggestion__new-part {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.suggestion__part-name {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #e2e8f0;
+}
+
+.suggestion__part-perf {
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+.suggestion__price-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.suggestion__price-diff {
+    font-weight: 700;
+    font-size: 1.15rem;
+    padding: 4px 14px;
+    border-radius: 8px;
+}
+
+.suggestion__price-diff.price-up {
+    color: #f87171;
+    background: rgba(248, 113, 113, 0.1);
+}
+
+.suggestion__price-diff.price-down {
+    color: #34d399;
+    background: rgba(52, 211, 153, 0.1);
+}
+
+.suggestion__price-total {
+    font-size: 0.9rem;
+    color: #94a3b8;
+}
+
+.suggestion__price-total strong {
+    color: #e2e8f0;
+}
+
+.btn--suggestion {
+    padding: 10px 24px;
+    font-size: 0.9rem;
+    border-radius: 24px;
 }
 
 /* FORMULARZ */
