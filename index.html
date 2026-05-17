@@ -4,155 +4,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Strona projektowa na przedmiot Programowanie w Internecie - Szymon Świeboda, s223412. Technologie: HTML5, CSS3, JavaScript.">
-    <title>Programowanie w Internecie - Szymon Świeboda</title>
+    <meta name="description" content="Zaawansowany Konfigurator PC - projekt zaliczeniowy. Szymon Świeboda, s223412.">
+    <title>Konfigurator PC — Szymon Świeboda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- Nawigacja SPA -->
-    <nav id="nawigacja" class="nawigacja" aria-label="Nawigacja główna">
-        <div class="nav-kontener">
-            <a href="#powitanie" class="nav-logo">Szymon Świeboda</a>
-            <button class="hamburger" id="hamburger" type="button" aria-label="Otwórz menu" aria-expanded="false"
+    <nav id="nawigacja" class="nav" aria-label="Nawigacja główna">
+        <div class="nav__container">
+            <a href="#hero" class="nav__logo">PC Builder</a>
+            <button class="nav__hamburger" id="hamburger" type="button" aria-label="Otwórz menu" aria-expanded="false"
                 aria-controls="nav-menu">
-                <span class="hamburger-linia"></span>
-                <span class="hamburger-linia"></span>
-                <span class="hamburger-linia"></span>
+                <span class="nav__hamburger-line"></span>
+                <span class="nav__hamburger-line"></span>
+                <span class="nav__hamburger-line"></span>
             </button>
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="#powitanie" class="nav-link aktywny">Start</a></li>
-                <li><a href="#technologie" class="nav-link">Technologie</a></li>
-                <li><a href="#konfigurator" class="nav-link">Konfigurator PC</a></li>
+            <ul class="nav__menu" id="nav-menu">
+                <li><a href="#hero" class="nav__link active" data-section="hero">Start</a></li>
+                <li><a href="#konfigurator" class="nav__link" data-section="konfigurator">Konfigurator</a></li>
+                <li><a href="#gra" class="nav__link" data-section="gra">Gra</a></li>
+                <li><a href="#zamowienie" class="nav__link" data-section="zamowienie">Zamówienie</a></li>
+                <li><a href="#o-projekcie" class="nav__link" data-section="o-projekcie">O projekcie</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Sekcja powitalna -->
-    <header id="powitanie" class="powitanie">
-        <div class="zawartosc-powitania">
-            <h1>Programowanie w Internecie</h1>
-            <p class="podtytul">Moja strona | Szymon Świeboda, s223412</p>
-            <p class="opis">Prosta, minimalistyczna i estetyczna strona oparta na czystym kodzie HTML5 i CSS3, zgodna z
-                najnowszymi standardami W3C.</p>
-            <a href="#technologie" class="przycisk">Dowiedz się więcej &#8595;</a>
+    <header id="hero" class="hero spa-view active">
+
+        <div class="hero__content">
+            <h1 class="hero__title">Zaawansowany <span class="hero__highlight">Konfigurator PC</span></h1>
+            <p class="hero__subtitle">Szymon Świeboda &bull; s223412 &bull; Programowanie w Internecie</p>
+            <p class="hero__desc">Zbuduj swój wymarzony komputer. Dobierz komponenty, sprawdź kompatybilność,
+                pobór mocy i wydajność — wszystko w czasie rzeczywistym.</p>
+            <a href="#konfigurator" class="btn btn--primary nav__link" data-section="konfigurator">Rozpocznij
+                konfigurację &#8595;</a>
         </div>
     </header>
 
     <main>
-        <!-- Sekcja z technologiami -->
-        <section id="technologie" class="sekcja-technologii">
-            <h2>Wykorzystane technologie</h2>
-
-            <div class="kontener-kafelkow">
-                <article class="kafelek">
-                    <h3>HTML5</h3>
-                    <p>Struktura strony w oparciu o tagi, takie jak <code>&lt;header&gt;</code>,
-                        <code>&lt;main&gt;</code> i <code>&lt;article&gt;</code>, które są zgodne ze standardem W3C.
-                    </p>
-                </article>
-
-                <article class="kafelek">
-                    <h3>CSS3</h3>
-                    <p>Estetyka przy pomocy czystego CSS. Właściwość <code>scroll-behavior: smooth</code> sprawia, że
-                        nawigacja po stronie jest płynna.</p>
-                </article>
-
-                <article class="kafelek">
-                    <h3>Układ Flexbox</h3>
-                    <p>Do ułożenia kafelków obok siebie wykorzystałem moduł Flexbox, dzięki czemu układ strony jest
-                        elastyczny i sam dostosowuje się do ekranu.</p>
-                </article>
-
+        <section id="konfigurator" class="section spa-view">
+            <h2 class="section__title">Dobierz podzespoły</h2>
+            <p class="section__subtitle">Wybierz komponenty z każdej kategorii. System automatycznie sprawdzi
+                kompatybilność i obliczy parametry zestawu.</p>
+            <div class="filter-bar">
+                <div class="filter-bar__item">
+                    <label class="toggle" for="auto-filter">
+                        <input type="checkbox" id="auto-filter" checked>
+                        <span class="toggle__slider"></span>
+                    </label>
+                    <span class="filter-bar__text">Ukryj niekompatybilne</span>
+                </div>
+                <div class="filter-bar__item">
+                    <span class="filter-bar__label">CPU:</span>
+                    <button class="filter-btn active" data-filter="cpu-brand" data-value="all">Wszystkie</button>
+                    <button class="filter-btn" data-filter="cpu-brand" data-value="intel">Intel</button>
+                    <button class="filter-btn" data-filter="cpu-brand" data-value="amd">AMD</button>
+                </div>
+                <div class="filter-bar__item">
+                    <span class="filter-bar__label">GPU:</span>
+                    <button class="filter-btn active" data-filter="gpu-brand" data-value="all">Wszystkie</button>
+                    <button class="filter-btn" data-filter="gpu-brand" data-value="nvidia">NVIDIA</button>
+                    <button class="filter-btn" data-filter="gpu-brand" data-value="amd">AMD</button>
+                </div>
             </div>
-        </section>
 
-        <!-- Sekcja Konfiguratora PC -->
-        <section id="konfigurator" class="sekcja-technologii">
-            <h2>Konfigurator PC</h2>
-            <p style="margin-bottom: 20px; color: #718096;">
-                Wybierz podzespoły. Po kliknięciu "Analizuj zestaw", dane zostaną asynchronicznie wysłane do serwera
-                (Kontrolera). Serwer przetworzy dane (Model) i zwróci wyniki. Widok zaktualizuje dane i wygeneruje
-                wykres bez przeładowania strony.
-            </p>
+            <div class="configurator">
+                <div class="configurator__grid">
 
-            <div class="gra-kontener" style="max-width: 800px;">
-                <form id="configurator-form" class="opcje-gry" style="text-align: left;">
-                    <div style="margin-bottom: 15px;">
-                        <label for="cpu-select"
-                            style="display: block; margin-bottom: 5px; font-weight: bold; color: #4a5568;">Procesor
-                            (CPU):</label>
-                        <select id="cpu-select" name="cpu"
-                            style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #cbd5e0; font-family: inherit;">
-                            <option value="i5-12400f">Intel Core i5-12400F</option>
-                            <option value="i7-13700k">Intel Core i7-13700K</option>
-                            <option value="r5-5600x">AMD Ryzen 5 5600X</option>
-                            <option value="r7-7800x3d">AMD Ryzen 7 7800X3D</option>
+                    <article class="card card--component" id="card-cpu">
+                        <div class="card__icon">🔲</div>
+                        <h3 class="card__title">Procesor (CPU)</h3>
+                        <select id="cpu-select" class="select" name="cpu">
+                            <option value="">— Wybierz procesor —</option>
                         </select>
-                    </div>
+                        <span class="card__compat" id="compat-cpu"></span>
+                    </article>
 
-                    <div style="margin-bottom: 15px;">
-                        <label for="gpu-select"
-                            style="display: block; margin-bottom: 5px; font-weight: bold; color: #4a5568;">Karta
-                            graficzna (GPU):</label>
-                        <select id="gpu-select" name="gpu"
-                            style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #cbd5e0; font-family: inherit;">
-                            <option value="rtx-3060">NVIDIA RTX 3060</option>
-                            <option value="rtx-4070">NVIDIA RTX 4070</option>
-                            <option value="rx-6700xt">AMD RX 6700 XT</option>
-                            <option value="rx-7900xtx">AMD RX 7900 XTX</option>
-                            <option value="none">Brak (Zintegrowana)</option>
+                    <article class="card card--component" id="card-mobo">
+                        <div class="card__icon">🖥️</div>
+                        <h3 class="card__title">Płyta główna</h3>
+                        <select id="mobo-select" class="select" name="mobo">
+                            <option value="">— Wybierz płytę —</option>
                         </select>
-                    </div>
+                        <span class="card__compat" id="compat-mobo"></span>
+                    </article>
 
-                    <div style="margin-bottom: 25px;">
-                        <label for="ram-select"
-                            style="display: block; margin-bottom: 5px; font-weight: bold; color: #4a5568;">Pamięć
-                            RAM:</label>
-                        <select id="ram-select" name="ram"
-                            style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #cbd5e0; font-family: inherit;">
-                            <option value="16gb-ddr4">16GB DDR4 3200MHz</option>
-                            <option value="32gb-ddr4">32GB DDR4 3600MHz</option>
-                            <option value="32gb-ddr5">32GB DDR5 6000MHz</option>
+                    <article class="card card--component" id="card-gpu">
+                        <div class="card__icon">🎮</div>
+                        <h3 class="card__title">Karta graficzna (GPU)</h3>
+                        <select id="gpu-select" class="select" name="gpu">
+                            <option value="">— Wybierz kartę —</option>
                         </select>
+                        <span class="card__compat" id="compat-gpu"></span>
+                    </article>
+
+                    <article class="card card--component" id="card-ram">
+                        <div class="card__icon">💾</div>
+                        <h3 class="card__title">Pamięć RAM</h3>
+                        <select id="ram-select" class="select" name="ram">
+                            <option value="">— Wybierz RAM —</option>
+                        </select>
+                        <span class="card__compat" id="compat-ram"></span>
+                    </article>
+
+                    <article class="card card--component" id="card-storage">
+                        <div class="card__icon">💿</div>
+                        <h3 class="card__title">Dysk</h3>
+                        <select id="storage-select" class="select" name="storage">
+                            <option value="">— Wybierz dysk —</option>
+                        </select>
+                    </article>
+
+                    <article class="card card--component" id="card-cooling">
+                        <div class="card__icon">❄️</div>
+                        <h3 class="card__title">Chłodzenie CPU</h3>
+                        <select id="cooling-select" class="select" name="cooling">
+                            <option value="">— Wybierz chłodzenie —</option>
+                        </select>
+                        <span class="card__compat" id="compat-cooling"></span>
+                    </article>
+
+                    <article class="card card--component" id="card-case">
+                        <div class="card__icon">🏗️</div>
+                        <h3 class="card__title">Obudowa</h3>
+                        <select id="case-select" class="select" name="case">
+                            <option value="">— Wybierz obudowę —</option>
+                        </select>
+                        <span class="card__compat" id="compat-case"></span>
+                    </article>
+
+                    <article class="card card--component" id="card-psu">
+                        <div class="card__icon">🔌</div>
+                        <h3 class="card__title">Zasilacz (PSU)</h3>
+                        <select id="psu-select" class="select" name="psu">
+                            <option value="">— Wybierz zasilacz —</option>
+                        </select>
+                        <span class="card__compat" id="compat-psu"></span>
+                    </article>
+                </div>
+
+                <aside class="summary" id="live-summary">
+                    <h3 class="summary__title">Podsumowanie na żywo</h3>
+                    <div class="summary__grid">
+                        <div class="summary__item">
+                            <span class="summary__label">Szacowany pobór mocy</span>
+                            <span class="summary__value" id="live-power">—</span>
+                        </div>
+                        <div class="summary__item">
+                            <span class="summary__label">Zalecany zasilacz (min.)</span>
+                            <span class="summary__value" id="live-rec-psu">—</span>
+                        </div>
+                        <div class="summary__item">
+                            <span class="summary__label">Szacunkowa cena zestawu</span>
+                            <span class="summary__value" id="live-price">—</span>
+                        </div>
+                        <div class="summary__item">
+                            <span class="summary__label">Status zasilacza</span>
+                            <span class="summary__value" id="live-psu-status">—</span>
+                        </div>
+                        <div class="summary__item">
+                            <span class="summary__label">Socket CPU ↔ Płyta</span>
+                            <span class="summary__value" id="live-socket">—</span>
+                        </div>
+                        <div class="summary__item">
+                            <span class="summary__label">Typ RAM ↔ Płyta</span>
+                            <span class="summary__value" id="live-ramtype">—</span>
+                        </div>
+                        <div class="summary__item">
+                            <span class="summary__label">Chłodzenie vs TDP</span>
+                            <span class="summary__value" id="live-cooling">—</span>
+                        </div>
+                        <div class="summary__item">
+                            <span class="summary__label">Obudowa vs płyta</span>
+                            <span class="summary__value" id="live-casefit">—</span>
+                        </div>
                     </div>
+                    <div class="summary__warnings" id="live-warnings"></div>
+                </aside>
 
-                    <button type="submit" class="przycisk" style="width: 100%;">Analizuj zestaw na serwerze</button>
-                </form>
+                <div class="configurator__actions">
+                    <button type="button" class="btn btn--primary" id="btn-analyze">
+                        Analizuj na serwerze &#9889;
+                    </button>
+                </div>
 
-                <!-- Wyniki zwracane z serwera -->
-                <div id="config-results"
-                    style="display: none; margin-top: 30px; text-align: left; padding-top: 20px; border-top: 1px solid #e2e8f0;">
-                    <h3 style="color: #2b6cb0; margin-bottom: 15px;">Wyniki analizy serwera:</h3>
-                    <ul style="list-style-type: none; margin-bottom: 20px; line-height: 1.8; color: #4a5568;">
-                        <li><strong>Szacowany pobór mocy:</strong> <span id="res-power">-</span> W</li>
-                        <li><strong>Zalecany zasilacz:</strong> <span id="res-psu">-</span> W</li>
-                        <li><strong>Ocena wydajności (0-100):</strong> <span id="res-perf">-</span></li>
-                        <li><strong>Uwagi (Bottleneck):</strong> <span id="res-bottleneck"
-                                style="color: #e53e3e; font-weight: bold;">-</span></li>
-                        <li><strong>Szacunkowa cena komponentów:</strong> <span id="res-price">-</span> PLN</li>
-                    </ul>
-
-                    <!-- Wykres z Chart.js -->
-                    <div style="max-width: 400px; margin: 0 auto;">
-                        <canvas id="powerChart"></canvas>
+                <div class="results" id="server-results">
+                    <h3 class="results__title">Wyniki analizy serwera</h3>
+                    <div class="results__grid">
+                        <div class="results__item">
+                            <span class="results__label">Pobór mocy</span>
+                            <span class="results__value" id="res-power">—</span>
+                        </div>
+                        <div class="results__item">
+                            <span class="results__label">Zalecany PSU</span>
+                            <span class="results__value" id="res-psu">—</span>
+                        </div>
+                        <div class="results__item">
+                            <span class="results__label">Wydajność</span>
+                            <span class="results__value" id="res-perf">—</span>
+                        </div>
+                        <div class="results__item">
+                            <span class="results__label">Cena</span>
+                            <span class="results__value" id="res-price">—</span>
+                        </div>
+                    </div>
+                    <p class="results__bottleneck" id="res-bottleneck"></p>
+                    <div class="results__chart">
+                        <h4 style="text-align:center; color:#e2e8f0; margin-bottom:10px;">Podział poboru mocy</h4>
+                        <div id="power-bar"
+                            style="display:flex; height: 20px; border-radius: 4px; overflow: hidden; margin-bottom: 10px;">
+                        </div>
+                        <div id="power-legend"
+                            style="display:flex; justify-content:center; gap: 15px; font-size: 0.9rem;"></div>
                     </div>
                 </div>
             </div>
         </section>
+
+        <section id="zamowienie" class="section spa-view section--alt">
+            <h2 class="section__title">Formularz zamówienia</h2>
+            <p class="section__subtitle">Podaj swoje dane, aby złożyć zamówienie skonfigurowanego zestawu.</p>
+
+            <form id="order-form" class="order-form card" novalidate>
+                <div class="form-group">
+                    <label for="order-name" class="form-label">Imię i nazwisko</label>
+                    <input type="text" id="order-name" class="form-input" name="name" required autocomplete="name"
+                        placeholder="Jan Kowalski">
+                    <span class="form-error" id="error-name"></span>
+                </div>
+                <div class="form-group">
+                    <label for="order-email" class="form-label">Adres e-mail</label>
+                    <input type="email" id="order-email" class="form-input" name="email" required autocomplete="email"
+                        placeholder="jan@kowalski.pl">
+                    <span class="form-error" id="error-email"></span>
+                </div>
+                <div class="form-group">
+                    <label for="order-zip" class="form-label">Kod pocztowy</label>
+                    <input type="text" id="order-zip" class="form-input" name="zip" required autocomplete="postal-code"
+                        placeholder="00-000" maxlength="6">
+                    <span class="form-error" id="error-zip"></span>
+                </div>
+                <div class="form-group">
+                    <label for="order-phone" class="form-label">Telefon (opcjonalnie)</label>
+                    <input type="tel" id="order-phone" class="form-input" name="phone" autocomplete="tel"
+                        placeholder="+48 123 456 789">
+                    <span class="form-error" id="error-phone"></span>
+                </div>
+                <button type="submit" class="btn btn--primary btn--glow btn--full" id="btn-order">
+                    Złóż zamówienie &#10003;
+                </button>
+                <div class="order-confirmation" id="order-confirmation"></div>
+            </form>
+        </section>
+
+        <section id="gra" class="section spa-view">
+            <h2 class="section__title">Gra - Kółko i krzyżyk</h2>
+            <p class="section__subtitle">Wymagany w projekcie element interaktywny (Vanilla JS).</p>
+            <div class="card game-container" style="max-width: 400px; margin: 0 auto; text-align: center;">
+                <div id="game-status" style="margin-bottom: 15px; font-weight: bold; font-size: 1.2rem;">Kolej gracza: X
+                </div>
+                <div id="tic-tac-toe-board"
+                    style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; margin-bottom: 15px;"></div>
+                <button type="button" class="btn btn--secondary" id="btn-reset-game">Zagraj ponownie</button>
+            </div>
+        </section>
+
+        <section id="o-projekcie" class="section spa-view section--alt">
+            <h2 class="section__title">O projekcie</h2>
+            <p class="section__subtitle">Architektura MVC, technologie i kod źródłowy.</p>
+
+            <div class="about__grid">
+                <article class="card card--about">
+                    <h3 class="card__title">🏗️ Architektura MVC</h3>
+                    <p><strong>View</strong> — HTML/CSS/JS (ta strona)</p>
+                    <p><strong>Controller</strong> — Endpointy API (Express.js)</p>
+                    <p><strong>Model</strong> — Logika biznesowa + baza komponentów</p>
+                </article>
+                <article class="card card--about">
+                    <h3 class="card__title">🛠️ Technologie</h3>
+                    <p>Frontend: HTML5, CSS3, Vanilla JS</p>
+                    <p>Backend: Node.js, Express, SQLite, Sequelize</p>
+                    <p>Hosting: GitHub Pages + Render.com</p>
+                </article>
+                <article class="card card--about">
+                    <h3 class="card__title">📦 Kod serwera</h3>
+                    <p>Pobierz paczkę z kodem backendu przygotowaną w ramach wymagań projektu zaliczeniowego.</p>
+                    <a href="backend.zip" download class="btn btn--secondary btn--download">
+                        &#128190; Pobierz kod serwera
+                    </a>
+                </article>
+            </div>
+        </section>
     </main>
 
-    <footer>
-        <p>&copy; 2026 Projekt na przedmiot: Programowanie w Internecie. Autor: Szymon Świeboda (s223412)</p>
+    <footer class="footer">
+        <p>&copy; 2026 Programowanie w Internecie &bull; Szymon Świeboda (s223412) &bull; SGGW</p>
     </footer>
 
-    <!-- Przycisk przewinięcia do góry -->
-    <button id="btn-do-gory" class="btn-do-gory" type="button" aria-label="Przewiń do góry">&#8593;</button>
-
-    <!-- Dołączenie biblioteki Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <button id="btn-top" class="btn-top" type="button" aria-label="Przewiń do góry">&#8593;</button>
 
     <script src="main.js"></script>
 
