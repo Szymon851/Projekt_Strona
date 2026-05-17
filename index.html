@@ -33,7 +33,7 @@
         </div>
     </nav>
 
-    <header id="hero" class="hero">
+    <header id="hero" class="hero spa-view active">
 
         <div class="hero__content">
             <h1 class="hero__title">Zaawansowany <span class="hero__highlight">Konfigurator PC</span></h1>
@@ -46,7 +46,7 @@
     </header>
 
     <main>
-        <section id="konfigurator" class="section">
+        <section id="konfigurator" class="section spa-view">
             <h2 class="section__title">Dobierz podzespoły</h2>
             <p class="section__subtitle">Wybierz komponenty z każdej kategorii. System automatycznie sprawdzi
                 kompatybilność i obliczy parametry zestawu.</p>
@@ -186,10 +186,13 @@
                     <div class="summary__warnings" id="live-warnings"></div>
                 </aside>
 
-                <div class="configurator__actions">
+                <div class="configurator__actions" style="display: flex; gap: 15px; flex-wrap: wrap;">
                     <button type="button" class="btn btn--primary" id="btn-analyze">
                         Analizuj na serwerze &#9889;
                     </button>
+                    <a href="#zamowienie" class="btn btn--secondary nav__link" data-section="zamowienie">
+                        Przejdź do zamówienia &#8594;
+                    </a>
                 </div>
 
                 <div class="results" id="server-results">
@@ -225,7 +228,7 @@
             </div>
         </section>
 
-        <section id="zamowienie" class="section section--alt">
+        <section id="zamowienie" class="section spa-view section--alt">
             <h2 class="section__title">Formularz zamówienia</h2>
             <p class="section__subtitle">Podaj swoje dane, aby złożyć zamówienie skonfigurowanego zestawu.</p>
 
@@ -261,7 +264,7 @@
             </form>
         </section>
 
-        <section id="gra" class="section">
+        <section id="gra" class="section spa-view">
             <h2 class="section__title">Gra - Kółko i krzyżyk</h2>
             <p class="section__subtitle">Wymagany w projekcie element interaktywny (Zagraj z zaawansowanym Botem!).</p>
             <div class="card game-container" style="max-width: 450px; margin: 0 auto; text-align: center;">
@@ -313,22 +316,35 @@
             </div>
         </section>
 
-        <section id="o-projekcie" class="section section--alt">
+        <section id="o-projekcie" class="section spa-view section--alt">
             <h2 class="section__title">O projekcie</h2>
-            <p class="section__subtitle">Architektura MVC, technologie i kod źródłowy.</p>
+            <p class="section__subtitle">Architektura, wymogi zaliczeniowe i wykorzystane technologie.</p>
 
             <div class="about__grid">
                 <article class="card card--about">
-                    <h3 class="card__title">🏗️ Architektura MVC</h3>
-                    <p><strong>View</strong> — HTML/CSS/JS (ta strona)</p>
-                    <p><strong>Controller</strong> — Endpointy API (Express.js)</p>
-                    <p><strong>Model</strong> — Logika biznesowa + baza komponentów</p>
+                    <h3 class="card__title">🏗️ Architektura One Page / SPA</h3>
+                    <p>Aplikacja została zbudowana na koncepcji SPA (Single Page Application). Posiada jeden plik HTML, w którym zawarte są wszystkie widoki. Nawigacja odbywa się bez przeładowania strony z wykorzystaniem logiki w języku JavaScript i CSS.</p>
                 </article>
                 <article class="card card--about">
-                    <h3 class="card__title">🛠️ Technologie</h3>
-                    <p>Frontend: HTML5, CSS3, Vanilla JS</p>
-                    <p>Backend: Node.js, Express, SQLite, Sequelize</p>
-                    <p>Hosting: GitHub Pages + Render.com</p>
+                    <h3 class="card__title">🚀 Czysty JavaScript (Vanilla JS)</h3>
+                    <p>Cała logika biznesowa opiera się na podstawowych mechanizmach języka JavaScript bez wykorzystywania bibliotek takich jak jQuery.</p>
+                </article>
+                <article class="card card--about">
+                    <h3 class="card__title">🎨 Czysty CSS (Bez Tailwind/Bootstrap)</h3>
+                    <p>Strona nie wykorzystuje żadnego zewnętrznego frameworka UI. Layout zbudowano natywnie w oparciu o Flexbox i Grid. Do stworzenia paska użycia mocy nie użyto elementu Canvas.</p>
+                </article>
+                <article class="card card--about">
+                    <h3 class="card__title">🧩 Architektura MVC</h3>
+                    <p>Projekt jest przystosowany do działania w architekturze <strong>Model-View-Controller</strong>, gdzie warstwą logiki danych i API jest samodzielny backend zbudowany w Node.js, natomiast widokiem jest plik index.html.</p>
+                </article>
+                <article class="card card--about">
+                    <h3 class="card__title">🛡️ Ochrona danych (Szyfrowanie)</h3>
+                    <p>Dane wrażliwe z formularza zamówienia przed umieszczeniem w bazie danych ORM przechodzą nieodwracalne hashowanie kryptograficzne w oparciu o algorytm <strong>SHA-256</strong>.</p>
+                </article>
+                <article class="card card--about">
+                    <h3 class="card__title">🎮 Złożona Gra Logiczna</h3>
+                    <p>Aplikacja posiada wymagany element interaktywny — grę w Kółko i Krzyżyk. Posiada tryb gry wieloosobowej oraz zaawansowany tryb gry z botem na trzech poziomach trudności (algorytm wygrywający i blokujący na wyższych poziomach).</p>
+                </article>
             </div>
         </section>
     </main>
