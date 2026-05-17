@@ -113,24 +113,30 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // SPA NAWIGACJA
-    var views = document.querySelectorAll('.spa-view');
-    function showView(id) {
-        views.forEach(function (v) {
-            if (v.id === id) { v.classList.add('active'); }
-            else { v.classList.remove('active'); }
+    // ===== AKTYWNA SEKCJA =====
+    var sections = document.querySelectorAll('header[id], section[id]');
+    function updateActiveNav() {
+        var current = '';
+        sections.forEach(function (sec) {
+            if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
         });
         navLinks.forEach(function (link) {
-            link.classList.toggle('active', link.getAttribute('data-section') === id);
+            link.classList.toggle('active', link.getAttribute('data-section') === current);
         });
     }
+    window.addEventListener('scroll', updateActiveNav);
 
     navLinks.forEach(function (link) {
         link.addEventListener('click', function (e) {
             e.preventDefault();
             var targetId = this.getAttribute('data-section');
-            showView(targetId);
-            window.scrollTo(0, 0);
+            var targetEl = document.getElementById(targetId);
+            if (targetEl) {
+                window.scrollTo({
+                    top: targetEl.offsetTop - 60,
+                    behavior: 'smooth'
+                });
+            }
         });
     });
 

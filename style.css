@@ -75,28 +75,6 @@ body {
     color: #6c63ff;
 }
 
-/* SPA Views */
-.spa-view {
-    display: none;
-    animation: fadeIn 0.3s ease-out;
-}
-
-.spa-view.active {
-    display: block;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 .nav__hamburger {
     display: none;
     flex-direction: column;
