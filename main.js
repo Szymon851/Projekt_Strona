@@ -126,19 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     window.addEventListener('scroll', updateActiveNav);
 
-    navLinks.forEach(function (link) {
-        link.addEventListener('click', function (e) {
-            e.preventDefault();
-            var targetId = this.getAttribute('data-section');
-            var targetEl = document.getElementById(targetId);
-            if (targetEl) {
-                window.scrollTo({
-                    top: targetEl.offsetTop - 60,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
+
 
     // SCROLL TO TOP
     var btnTop = document.getElementById('btn-top');
@@ -474,7 +462,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // ANALIZA NA SERWERZE
     var btnAnalyze = document.getElementById('btn-analyze');
-    var chartInstance = null;
 
     btnAnalyze.addEventListener('click', async function () {
         var cpu = selectors.cpu.value;
