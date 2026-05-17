@@ -242,6 +242,13 @@ header.spa-view.active {
     background: rgba(255, 255, 255, 0.1);
 }
 
+.btn--secondary.aktywny {
+    background: #6c63ff;
+    border-color: #6c63ff;
+    color: #fff;
+    box-shadow: 0 0 15px rgba(108, 99, 255, 0.4);
+}
+
 .btn--full {
     width: 100%;
     justify-content: center;
