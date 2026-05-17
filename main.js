@@ -761,4 +761,35 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // ===== RESET KOMPONENTÓW =====
+    document.querySelectorAll('.card__reset').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var targetId = this.getAttribute('data-target');
+            var select = document.getElementById(targetId);
+            if (select) {
+                select.value = "";
+                var event = new Event('change', { bubbles: true });
+                select.dispatchEvent(event);
+            }
+        });
+    });
+
+    var btnResetAll = document.getElementById('btn-reset-all');
+    if (btnResetAll) {
+        btnResetAll.addEventListener('click', function () {
+            // Czyszczenie wszystkich selectów
+            document.querySelectorAll('.select').forEach(function (select) {
+                select.value = "";
+            });
+            // Aktualizacja widoku
+            updateLiveSummary();
+            filterOptions();
+            // Ukrycie wyników analizy serwerowej
+            var resultsDiv = document.getElementById('server-results');
+            if (resultsDiv) {
+                resultsDiv.classList.remove('visible');
+            }
+        });
+    }
+
 });
