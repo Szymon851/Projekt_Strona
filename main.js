@@ -336,7 +336,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var groups = {};
 
         // Wyczyść select i dodaj opcję domyślną
-        sel.innerHTML = '<option value="">— Wybierz —</option>';
+        sel.innerHTML = '<option value="">--- Wybierz ---</option>';
 
         opts.forEach(function (o) {
             if (o.value === '' || allowedValues === null || allowedValues.indexOf(o.value) !== -1) {
@@ -798,7 +798,7 @@ document.addEventListener('DOMContentLoaded', function () {
             } else if (typeof updateLiveSummary === 'function') {
                 updateLiveSummary();
             }
-            
+
             // Ukrycie wyników analizy serwerowej
             var resultsDiv = document.getElementById('server-results');
             if (resultsDiv) {

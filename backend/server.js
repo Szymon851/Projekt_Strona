@@ -133,9 +133,9 @@ function analyzePC(config) {
     const perfScore = (cpu.performance + gpu.performance + ram.performance) / 3;
 
     if (cpu.performance > gpu.performance + 20) {
-        bottleneck = 'GPU Bottleneck — procesor przewyższa kartę graficzną';
+        bottleneck = 'GPU Bottleneck - procesor przewyższa kartę graficzną';
     } else if (gpu.performance > cpu.performance + 20) {
-        bottleneck = 'CPU Bottleneck — karta graficzna przewyższa procesor';
+        bottleneck = 'CPU Bottleneck - karta graficzna przewyższa procesor';
     }
 
     return {
@@ -188,7 +188,7 @@ app.post('/api/order', (req, res) => {
         if (!cpu || !gpu || !ram) { errors.push('Nieznany podzespół.'); }
         else {
             const totalPower = cpu.power + gpu.power + ram.power + 50;
-            if (psuW < totalPower) errors.push('Zasilacz (' + psuW + 'W) za słaby — min. ' + totalPower + 'W.');
+            if (psuW < totalPower) errors.push('Zasilacz (' + psuW + 'W) za słaby - min. ' + totalPower + 'W.');
         }
     }
 

@@ -79,21 +79,31 @@ body {
     background: rgba(108, 99, 255, 0.15);
     color: #6c63ff;
 }
+
 /* SPA Views */
 .spa-view {
     display: none;
     animation: fadeIn 0.4s ease-out;
 }
+
 section.spa-view.active {
     display: block;
 }
+
 header.spa-view.active {
     display: flex;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .nav__hamburger {
@@ -933,7 +943,7 @@ header.spa-view.active {
     }
 }
 
-/* RWD — Mobile (max 480px) */
+/* RWD Mobile (max 480px) */
 @media (max-width: 480px) {
     .hero {
         padding: 40px 16px;
