@@ -26,8 +26,8 @@
             <ul class="nav__menu" id="nav-menu">
                 <li><a href="#hero" class="nav__link active" data-section="hero">Start</a></li>
                 <li><a href="#konfigurator" class="nav__link" data-section="konfigurator">Konfigurator</a></li>
-                <li><a href="#gra" class="nav__link" data-section="gra">Gra</a></li>
                 <li><a href="#zamowienie" class="nav__link" data-section="zamowienie">Zamówienie</a></li>
+                <li><a href="#gra" class="nav__link" data-section="gra">Gra</a></li>
                 <li><a href="#o-projekcie" class="nav__link" data-section="o-projekcie">O projekcie</a></li>
             </ul>
         </div>
@@ -270,21 +270,44 @@
                     <button class="btn btn--secondary" id="btn-2osoby">2 Graczy</button>
                 </div>
                 <div id="poziom-kontener" style="display:flex; justify-content:center; gap:5px; margin-bottom:15px;">
-                    <button class="btn btn--secondary btn-poziom" data-poziom="1" style="padding:5px 10px; font-size:0.8rem;">Łatwy</button>
-                    <button class="btn btn--secondary btn-poziom aktywny" data-poziom="2" style="padding:5px 10px; font-size:0.8rem;">Średni</button>
-                    <button class="btn btn--secondary btn-poziom" data-poziom="3" style="padding:5px 10px; font-size:0.8rem;">Trudny</button>
+                    <button class="btn btn--secondary btn-poziom" data-poziom="1"
+                        style="padding:5px 10px; font-size:0.8rem;">Łatwy</button>
+                    <button class="btn btn--secondary btn-poziom aktywny" data-poziom="2"
+                        style="padding:5px 10px; font-size:0.8rem;">Średni</button>
+                    <button class="btn btn--secondary btn-poziom" data-poziom="3"
+                        style="padding:5px 10px; font-size:0.8rem;">Trudny</button>
                 </div>
-                <div id="status" style="margin-bottom: 15px; font-weight: bold; font-size: 1.2rem;">Kolej gracza: X</div>
-                <div id="plansza" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; margin-bottom: 15px;">
-                    <div class="komorka" data-indeks="0" style="background: rgba(255,255,255,0.05); border-radius: 4px; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: bold; cursor: pointer;"></div>
-                    <div class="komorka" data-indeks="1" style="background: rgba(255,255,255,0.05); border-radius: 4px; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: bold; cursor: pointer;"></div>
-                    <div class="komorka" data-indeks="2" style="background: rgba(255,255,255,0.05); border-radius: 4px; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: bold; cursor: pointer;"></div>
-                    <div class="komorka" data-indeks="3" style="background: rgba(255,255,255,0.05); border-radius: 4px; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: bold; cursor: pointer;"></div>
-                    <div class="komorka" data-indeks="4" style="background: rgba(255,255,255,0.05); border-radius: 4px; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: bold; cursor: pointer;"></div>
-                    <div class="komorka" data-indeks="5" style="background: rgba(255,255,255,0.05); border-radius: 4px; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: bold; cursor: pointer;"></div>
-                    <div class="komorka" data-indeks="6" style="background: rgba(255,255,255,0.05); border-radius: 4px; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: bold; cursor: pointer;"></div>
-                    <div class="komorka" data-indeks="7" style="background: rgba(255,255,255,0.05); border-radius: 4px; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: bold; cursor: pointer;"></div>
-                    <div class="komorka" data-indeks="8" style="background: rgba(255,255,255,0.05); border-radius: 4px; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: bold; cursor: pointer;"></div>
+                <div id="status" style="margin-bottom: 15px; font-weight: bold; font-size: 1.2rem;">Kolej gracza: X
+                </div>
+                <div id="plansza"
+                    style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; margin-bottom: 15px;">
+                    <div class="komorka" data-indeks="0"
+                        style="background: rgba(255,255,255,0.05); border-radius: 4px; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: bold; cursor: pointer;">
+                    </div>
+                    <div class="komorka" data-indeks="1"
+                        style="background: rgba(255,255,255,0.05); border-radius: 4px; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: bold; cursor: pointer;">
+                    </div>
+                    <div class="komorka" data-indeks="2"
+                        style="background: rgba(255,255,255,0.05); border-radius: 4px; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: bold; cursor: pointer;">
+                    </div>
+                    <div class="komorka" data-indeks="3"
+                        style="background: rgba(255,255,255,0.05); border-radius: 4px; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: bold; cursor: pointer;">
+                    </div>
+                    <div class="komorka" data-indeks="4"
+                        style="background: rgba(255,255,255,0.05); border-radius: 4px; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: bold; cursor: pointer;">
+                    </div>
+                    <div class="komorka" data-indeks="5"
+                        style="background: rgba(255,255,255,0.05); border-radius: 4px; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: bold; cursor: pointer;">
+                    </div>
+                    <div class="komorka" data-indeks="6"
+                        style="background: rgba(255,255,255,0.05); border-radius: 4px; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: bold; cursor: pointer;">
+                    </div>
+                    <div class="komorka" data-indeks="7"
+                        style="background: rgba(255,255,255,0.05); border-radius: 4px; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: bold; cursor: pointer;">
+                    </div>
+                    <div class="komorka" data-indeks="8"
+                        style="background: rgba(255,255,255,0.05); border-radius: 4px; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: bold; cursor: pointer;">
+                    </div>
                 </div>
                 <button type="button" class="btn btn--primary" id="btn-restart">Zagraj ponownie</button>
             </div>
