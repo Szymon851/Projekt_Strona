@@ -781,9 +781,24 @@ document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.select').forEach(function (select) {
                 select.value = "";
             });
-            // Aktualizacja widoku
-            updateLiveSummary();
-            filterOptions();
+            // Reset filtrów marek do domyślnych (Wszystkie)
+            if (typeof activeBrandFilters !== 'undefined') {
+                activeBrandFilters['cpu-brand'] = 'all';
+                activeBrandFilters['gpu-brand'] = 'all';
+                document.querySelectorAll('.filter-btn').forEach(function (b) {
+                    b.classList.remove('active');
+                    if (b.getAttribute('data-value') === 'all') {
+                        b.classList.add('active');
+                    }
+                });
+            }
+            // Aktualizacja opcji i podsumowania
+            if (typeof applyFilters === 'function') {
+                applyFilters();
+            } else if (typeof updateLiveSummary === 'function') {
+                updateLiveSummary();
+            }
+            
             // Ukrycie wyników analizy serwerowej
             var resultsDiv = document.getElementById('server-results');
             if (resultsDiv) {
