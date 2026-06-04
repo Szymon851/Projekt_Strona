@@ -22,7 +22,7 @@ var Tlumaczenia = (function () {
     function pobierzJezyk(kodJezyka) {
         return new Promise(function(resolve, reject) {
             var script = document.createElement('script');
-            script.src = 'lang/' + kodJezyka + '.js?v=' + Date.now();
+            script.src = 'lang/' + kodJezyka + '.js';
             script.onload = function() {
                 if (window.TlumaczeniaDanych && window.TlumaczeniaDanych[kodJezyka]) {
                     slowniki[kodJezyka] = window.TlumaczeniaDanych[kodJezyka];
@@ -146,17 +146,19 @@ var Tlumaczenia = (function () {
         // Ładuj oba języki na start, by przełączanie było natychmiastowe
         var obietnice = DOSTEPNE_JEZYKI.map(function (kod) { return pobierzJezyk(kod); });
 
+        // Obsługa przycisków przełącznika - poza then, aby działało nawet przy błędzie pierwszego ładowania
+        document.addEventListener('click', function (e) {
+            var btn = e.target.closest('.lang-btn');
+            if (btn) {
+                var jezyk = btn.getAttribute('data-lang');
+                ustawJezyk(jezyk);
+            }
+        });
+
         return Promise.all(obietnice).then(function () {
             ustawJezyk(startowyJezyk);
-
-            // Obsługa przycisków przełącznika
-            document.addEventListener('click', function (e) {
-                var btn = e.target.closest('.lang-btn');
-                if (btn) {
-                    var jezyk = btn.getAttribute('data-lang');
-                    ustawJezyk(jezyk);
-                }
-            });
+        }).catch(function(e) {
+            console.error("Błąd ładowania języków:", e);
         });
     }
 
