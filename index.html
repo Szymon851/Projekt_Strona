@@ -35,18 +35,6 @@
         <div class="nav__container">
             <a href="#hero" class="nav__logo nav__link" data-section="hero">PC Builder</a>
 
-            <!-- ===== LANGUAGE SWITCHER ===== -->
-            <div class="lang-switcher" id="lang-switcher">
-                <button type="button" class="lang-btn active" data-lang="pl" aria-label="Polski">
-                    <span class="lang-btn__flag">🇵🇱</span>
-                    <span class="lang-btn__code">PL</span>
-                </button>
-                <button type="button" class="lang-btn" data-lang="en" aria-label="English">
-                    <span class="lang-btn__flag">🇬🇧</span>
-                    <span class="lang-btn__code">EN</span>
-                </button>
-            </div>
-
             <button class="nav__hamburger" id="hamburger" type="button" data-i18n-aria="nav_hamburger_label" aria-label="Otwórz menu" aria-expanded="false"
                 aria-controls="nav-menu">
                 <span class="nav__hamburger-line"></span>
@@ -59,6 +47,19 @@
                 <li><a href="#zamowienie" class="nav__link" data-section="zamowienie" data-i18n="nav_order">Zamówienie</a></li>
                 <li><a href="#gra" class="nav__link" data-section="gra" data-i18n="nav_game">Gra</a></li>
                 <li><a href="#o-projekcie" class="nav__link" data-section="o-projekcie" data-i18n="nav_about">O projekcie</a></li>
+                <li class="nav__lang-item">
+                    <!-- ===== LANGUAGE SWITCHER ===== -->
+                    <div class="lang-switcher" id="lang-switcher">
+                        <button type="button" class="lang-btn active" data-lang="pl" aria-label="Polski">
+                            <span class="lang-btn__flag">🇵🇱</span>
+                            <span class="lang-btn__code">PL</span>
+                        </button>
+                        <button type="button" class="lang-btn" data-lang="en" aria-label="English">
+                            <span class="lang-btn__flag">🇬🇧</span>
+                            <span class="lang-btn__code">EN</span>
+                        </button>
+                    </div>
+                </li>
             </ul>
         </div>
     </nav>

@@ -1107,10 +1107,24 @@ header.spa-view.active {
     padding: 3px;
 }
 
+.nav__lang-item {
+    margin-left: 10px;
+}
+
+@media (max-width: 768px) {
+    .nav__lang-item {
+        margin-left: 0;
+        margin-top: 15px;
+        display: flex;
+        justify-content: center;
+    }
+}
+
 .lang-btn {
     display: flex;
     align-items: center;
-    gap: 5px;
+    justify-content: center;
+    gap: 6px;
     padding: 5px 12px;
     border: none;
     border-radius: 24px;
@@ -1122,6 +1136,7 @@ header.spa-view.active {
     cursor: pointer;
     transition: all 0.25s ease;
     white-space: nowrap;
+    line-height: 1;
 }
 
 .lang-btn:hover {
@@ -1138,11 +1153,16 @@ header.spa-view.active {
 .lang-btn__flag {
     font-size: 1.1rem;
     line-height: 1;
+    display: flex;
+    align-items: center;
 }
 
 .lang-btn__code {
     letter-spacing: 1px;
     text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    margin-top: 2px;
 }
 
 @media (max-width: 768px) {

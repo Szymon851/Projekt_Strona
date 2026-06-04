@@ -20,15 +20,22 @@ var Tlumaczenia = (function () {
      * Pobiera plik JSON z tłumaczeniami dla danego języka.
      */
     function pobierzJezyk(kodJezyka) {
-        return fetch('lang/' + kodJezyka + '.json?v=' + Date.now())
-            .then(function (res) {
-                if (!res.ok) throw new Error('Nie udało się załadować: lang/' + kodJezyka + '.json');
-                return res.json();
-            })
-            .then(function (dane) {
-                slowniki[kodJezyka] = dane;
-                return dane;
-            });
+        return new Promise(function(resolve, reject) {
+            var script = document.createElement('script');
+            script.src = 'lang/' + kodJezyka + '.js?v=' + Date.now();
+            script.onload = function() {
+                if (window.TlumaczeniaDanych && window.TlumaczeniaDanych[kodJezyka]) {
+                    slowniki[kodJezyka] = window.TlumaczeniaDanych[kodJezyka];
+                    resolve(slowniki[kodJezyka]);
+                } else {
+                    reject(new Error('Brak danych w lang/' + kodJezyka + '.js'));
+                }
+            };
+            script.onerror = function() {
+                reject(new Error('Nie udało się załadować: lang/' + kodJezyka + '.js'));
+            };
+            document.head.appendChild(script);
+        });
     }
 
     /**

@@ -1,4 +1,5 @@
-{
+window.TlumaczeniaDanych = window.TlumaczeniaDanych || {};
+window.TlumaczeniaDanych['pl'] = {
     "lang_code": "pl",
     "lang_name": "Polski",
     "html_lang": "pl",
@@ -163,4 +164,4 @@
     "cookie_accept": "Akceptuję wszystkie",
     "cookie_reject": "Tylko niezbędne",
     "cookie_more": "Dowiedz się więcej"
-}
+};
