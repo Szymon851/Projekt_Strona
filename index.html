@@ -10,26 +10,55 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <link rel="stylesheet" href="style.css?v=5">
+    <link rel="stylesheet" href="style.css?v=6">
 </head>
 
 <body>
 
+    <!-- ===== COOKIE CONSENT BANNER (RODO / GDPR) ===== -->
+    <div id="cookie-banner" class="cookie-banner" role="dialog" aria-labelledby="cookie-title" aria-modal="false">
+        <div class="cookie-banner__content">
+            <h3 class="cookie-banner__title" id="cookie-title" data-i18n="cookie_title">🍪 Pliki cookies i prywatność</h3>
+            <p class="cookie-banner__text" data-i18n="cookie_text">
+                Ta strona wykorzystuje pliki cookies w celu zapewnienia prawidłowego działania serwisu oraz analizy ruchu.
+                Korzystając z serwisu, wyrażasz zgodę na wykorzystywanie plików cookies zgodnie z polityką prywatności.
+                Możesz zmienić ustawienia cookies w swojej przeglądarce.
+            </p>
+            <div class="cookie-banner__actions">
+                <button type="button" class="btn btn--primary cookie-btn" id="cookie-accept" data-i18n="cookie_accept">Akceptuję wszystkie</button>
+                <button type="button" class="btn btn--secondary cookie-btn" id="cookie-reject" data-i18n="cookie_reject">Tylko niezbędne</button>
+            </div>
+        </div>
+    </div>
+
     <nav id="nawigacja" class="nav" aria-label="Nawigacja główna">
         <div class="nav__container">
             <a href="#hero" class="nav__logo nav__link" data-section="hero">PC Builder</a>
-            <button class="nav__hamburger" id="hamburger" type="button" aria-label="Otwórz menu" aria-expanded="false"
+
+            <!-- ===== LANGUAGE SWITCHER ===== -->
+            <div class="lang-switcher" id="lang-switcher">
+                <button type="button" class="lang-btn active" data-lang="pl" aria-label="Polski">
+                    <span class="lang-btn__flag">🇵🇱</span>
+                    <span class="lang-btn__code">PL</span>
+                </button>
+                <button type="button" class="lang-btn" data-lang="en" aria-label="English">
+                    <span class="lang-btn__flag">🇬🇧</span>
+                    <span class="lang-btn__code">EN</span>
+                </button>
+            </div>
+
+            <button class="nav__hamburger" id="hamburger" type="button" data-i18n-aria="nav_hamburger_label" aria-label="Otwórz menu" aria-expanded="false"
                 aria-controls="nav-menu">
                 <span class="nav__hamburger-line"></span>
                 <span class="nav__hamburger-line"></span>
                 <span class="nav__hamburger-line"></span>
             </button>
             <ul class="nav__menu" id="nav-menu">
-                <li><a href="#hero" class="nav__link active" data-section="hero">Start</a></li>
-                <li><a href="#konfigurator" class="nav__link" data-section="konfigurator">Konfigurator</a></li>
-                <li><a href="#zamowienie" class="nav__link" data-section="zamowienie">Zamówienie</a></li>
-                <li><a href="#gra" class="nav__link" data-section="gra">Gra</a></li>
-                <li><a href="#o-projekcie" class="nav__link" data-section="o-projekcie">O projekcie</a></li>
+                <li><a href="#hero" class="nav__link active" data-section="hero" data-i18n="nav_start">Start</a></li>
+                <li><a href="#konfigurator" class="nav__link" data-section="konfigurator" data-i18n="nav_configurator">Konfigurator</a></li>
+                <li><a href="#zamowienie" class="nav__link" data-section="zamowienie" data-i18n="nav_order">Zamówienie</a></li>
+                <li><a href="#gra" class="nav__link" data-section="gra" data-i18n="nav_game">Gra</a></li>
+                <li><a href="#o-projekcie" class="nav__link" data-section="o-projekcie" data-i18n="nav_about">O projekcie</a></li>
             </ul>
         </div>
     </nav>
@@ -37,19 +66,19 @@
     <header id="hero" class="hero spa-view active">
 
         <div class="hero__content">
-            <h1 class="hero__title">Zaawansowany <span class="hero__highlight">Konfigurator PC</span></h1>
-            <p class="hero__subtitle">Szymon Świeboda &bull; s223412 &bull; Programowanie w Internecie</p>
-            <p class="hero__desc">Zbuduj swój wymarzony komputer. Dobierz komponenty, sprawdź kompatybilność,
+            <h1 class="hero__title"><span data-i18n="hero_title_1">Zaawansowany </span><span class="hero__highlight" data-i18n="hero_title_highlight">Konfigurator PC</span></h1>
+            <p class="hero__subtitle" data-i18n="hero_subtitle">Szymon Świeboda &bull; s223412 &bull; Programowanie w Internecie</p>
+            <p class="hero__desc" data-i18n="hero_desc">Zbuduj swój wymarzony komputer. Dobierz komponenty, sprawdź kompatybilność,
                 pobór mocy i wydajność - wszystko w czasie rzeczywistym.</p>
-            <a href="#konfigurator" class="btn btn--primary nav__link" data-section="konfigurator">Rozpocznij
+            <a href="#konfigurator" class="btn btn--primary nav__link" data-section="konfigurator" data-i18n="hero_cta">Rozpocznij
                 konfigurację &#8595;</a>
         </div>
     </header>
 
     <main>
         <section id="konfigurator" class="section spa-view">
-            <h2 class="section__title">Dobierz podzespoły</h2>
-            <p class="section__subtitle">Wybierz komponenty z każdej kategorii. System automatycznie sprawdzi
+            <h2 class="section__title" data-i18n="config_title">Dobierz podzespoły</h2>
+            <p class="section__subtitle" data-i18n="config_subtitle">Wybierz komponenty z każdej kategorii. System automatycznie sprawdzi
                 kompatybilność i obliczy parametry zestawu.</p>
             <div class="filter-bar">
                 <div class="filter-bar__item">
@@ -57,17 +86,17 @@
                         <input type="checkbox" id="auto-filter" checked>
                         <span class="toggle__slider"></span>
                     </label>
-                    <span class="filter-bar__text">Ukryj niekompatybilne</span>
+                    <span class="filter-bar__text" data-i18n="config_hide_incompatible">Ukryj niekompatybilne</span>
                 </div>
                 <div class="filter-bar__item">
                     <span class="filter-bar__label">CPU:</span>
-                    <button class="filter-btn active" data-filter="cpu-brand" data-value="all">Wszystkie</button>
+                    <button class="filter-btn active" data-filter="cpu-brand" data-value="all" data-i18n="config_all">Wszystkie</button>
                     <button class="filter-btn" data-filter="cpu-brand" data-value="intel">Intel</button>
                     <button class="filter-btn" data-filter="cpu-brand" data-value="amd">AMD</button>
                 </div>
                 <div class="filter-bar__item">
                     <span class="filter-bar__label">GPU:</span>
-                    <button class="filter-btn active" data-filter="gpu-brand" data-value="all">Wszystkie</button>
+                    <button class="filter-btn active" data-filter="gpu-brand" data-value="all" data-i18n="config_all">Wszystkie</button>
                     <button class="filter-btn" data-filter="gpu-brand" data-value="nvidia">NVIDIA</button>
                     <button class="filter-btn" data-filter="gpu-brand" data-value="amd">AMD</button>
                 </div>
@@ -78,125 +107,125 @@
 
                     <article class="card card--component" id="card-cpu">
                         <button type="button" class="card__reset" data-target="cpu-select"
-                            aria-label="Wyczyść">&#10006;</button>
+                            data-i18n-aria="card_reset_label" aria-label="Wyczyść">&#10006;</button>
                         <div class="card__icon">🔲</div>
-                        <h3 class="card__title">Procesor (CPU)</h3>
+                        <h3 class="card__title" data-i18n="card_cpu">Procesor (CPU)</h3>
                         <select id="cpu-select" class="select" name="cpu">
-                            <option value="">- Wybierz procesor -</option>
+                            <option value="" data-i18n="select_cpu">- Wybierz procesor -</option>
                         </select>
                         <span class="card__compat" id="compat-cpu"></span>
                     </article>
 
                     <article class="card card--component" id="card-mobo">
                         <button type="button" class="card__reset" data-target="mobo-select"
-                            aria-label="Wyczyść">&#10006;</button>
+                            data-i18n-aria="card_reset_label" aria-label="Wyczyść">&#10006;</button>
                         <div class="card__icon">🖥️</div>
-                        <h3 class="card__title">Płyta główna</h3>
+                        <h3 class="card__title" data-i18n="card_mobo">Płyta główna</h3>
                         <select id="mobo-select" class="select" name="mobo">
-                            <option value="">- Wybierz płytę -</option>
+                            <option value="" data-i18n="select_mobo">- Wybierz płytę -</option>
                         </select>
                         <span class="card__compat" id="compat-mobo"></span>
                     </article>
 
                     <article class="card card--component" id="card-gpu">
                         <button type="button" class="card__reset" data-target="gpu-select"
-                            aria-label="Wyczyść">&#10006;</button>
+                            data-i18n-aria="card_reset_label" aria-label="Wyczyść">&#10006;</button>
                         <div class="card__icon">🎮</div>
-                        <h3 class="card__title">Karta graficzna (GPU)</h3>
+                        <h3 class="card__title" data-i18n="card_gpu">Karta graficzna (GPU)</h3>
                         <select id="gpu-select" class="select" name="gpu">
-                            <option value="">- Wybierz kartę -</option>
+                            <option value="" data-i18n="select_gpu">- Wybierz kartę -</option>
                         </select>
                         <span class="card__compat" id="compat-gpu"></span>
                     </article>
 
                     <article class="card card--component" id="card-ram">
                         <button type="button" class="card__reset" data-target="ram-select"
-                            aria-label="Wyczyść">&#10006;</button>
+                            data-i18n-aria="card_reset_label" aria-label="Wyczyść">&#10006;</button>
                         <div class="card__icon">💾</div>
-                        <h3 class="card__title">Pamięć RAM</h3>
+                        <h3 class="card__title" data-i18n="card_ram">Pamięć RAM</h3>
                         <select id="ram-select" class="select" name="ram">
-                            <option value="">- Wybierz RAM -</option>
+                            <option value="" data-i18n="select_ram">- Wybierz RAM -</option>
                         </select>
                         <span class="card__compat" id="compat-ram"></span>
                     </article>
 
                     <article class="card card--component" id="card-storage">
                         <button type="button" class="card__reset" data-target="storage-select"
-                            aria-label="Wyczyść">&#10006;</button>
+                            data-i18n-aria="card_reset_label" aria-label="Wyczyść">&#10006;</button>
                         <div class="card__icon">💿</div>
-                        <h3 class="card__title">Dysk</h3>
+                        <h3 class="card__title" data-i18n="card_storage">Dysk</h3>
                         <select id="storage-select" class="select" name="storage">
-                            <option value="">- Wybierz dysk -</option>
+                            <option value="" data-i18n="select_storage">- Wybierz dysk -</option>
                         </select>
                     </article>
 
                     <article class="card card--component" id="card-cooling">
                         <button type="button" class="card__reset" data-target="cooling-select"
-                            aria-label="Wyczyść">&#10006;</button>
+                            data-i18n-aria="card_reset_label" aria-label="Wyczyść">&#10006;</button>
                         <div class="card__icon">❄️</div>
-                        <h3 class="card__title">Chłodzenie CPU</h3>
+                        <h3 class="card__title" data-i18n="card_cooling">Chłodzenie CPU</h3>
                         <select id="cooling-select" class="select" name="cooling">
-                            <option value="">- Wybierz chłodzenie -</option>
+                            <option value="" data-i18n="select_cooling">- Wybierz chłodzenie -</option>
                         </select>
                         <span class="card__compat" id="compat-cooling"></span>
                     </article>
 
                     <article class="card card--component" id="card-case">
                         <button type="button" class="card__reset" data-target="case-select"
-                            aria-label="Wyczyść">&#10006;</button>
+                            data-i18n-aria="card_reset_label" aria-label="Wyczyść">&#10006;</button>
                         <div class="card__icon">🏗️</div>
-                        <h3 class="card__title">Obudowa</h3>
+                        <h3 class="card__title" data-i18n="card_case">Obudowa</h3>
                         <select id="case-select" class="select" name="case">
-                            <option value="">- Wybierz obudowę -</option>
+                            <option value="" data-i18n="select_case">- Wybierz obudowę -</option>
                         </select>
                         <span class="card__compat" id="compat-case"></span>
                     </article>
 
                     <article class="card card--component" id="card-psu">
                         <button type="button" class="card__reset" data-target="psu-select"
-                            aria-label="Wyczyść">&#10006;</button>
+                            data-i18n-aria="card_reset_label" aria-label="Wyczyść">&#10006;</button>
                         <div class="card__icon">🔌</div>
-                        <h3 class="card__title">Zasilacz (PSU)</h3>
+                        <h3 class="card__title" data-i18n="card_psu">Zasilacz (PSU)</h3>
                         <select id="psu-select" class="select" name="psu">
-                            <option value="">- Wybierz zasilacz -</option>
+                            <option value="" data-i18n="select_psu">- Wybierz zasilacz -</option>
                         </select>
                         <span class="card__compat" id="compat-psu"></span>
                     </article>
                 </div>
 
                 <aside class="summary" id="live-summary">
-                    <h3 class="summary__title">Podsumowanie na żywo</h3>
+                    <h3 class="summary__title" data-i18n="summary_title">Podsumowanie na żywo</h3>
                     <div class="summary__grid">
                         <div class="summary__item">
-                            <span class="summary__label">Szacowany pobór mocy</span>
+                            <span class="summary__label" data-i18n="summary_power">Szacowany pobór mocy</span>
                             <span class="summary__value" id="live-power">—</span>
                         </div>
                         <div class="summary__item">
-                            <span class="summary__label">Zalecany zasilacz (min.)</span>
+                            <span class="summary__label" data-i18n="summary_rec_psu">Zalecany zasilacz (min.)</span>
                             <span class="summary__value" id="live-rec-psu">—</span>
                         </div>
                         <div class="summary__item">
-                            <span class="summary__label">Szacunkowa cena zestawu</span>
+                            <span class="summary__label" data-i18n="summary_price">Szacunkowa cena zestawu</span>
                             <span class="summary__value" id="live-price">—</span>
                         </div>
                         <div class="summary__item">
-                            <span class="summary__label">Status zasilacza</span>
+                            <span class="summary__label" data-i18n="summary_psu_status">Status zasilacza</span>
                             <span class="summary__value" id="live-psu-status">—</span>
                         </div>
                         <div class="summary__item">
-                            <span class="summary__label">Socket CPU ↔ Płyta</span>
+                            <span class="summary__label" data-i18n="summary_socket">Socket CPU ↔ Płyta</span>
                             <span class="summary__value" id="live-socket">—</span>
                         </div>
                         <div class="summary__item">
-                            <span class="summary__label">Typ RAM ↔ Płyta</span>
+                            <span class="summary__label" data-i18n="summary_ramtype">Typ RAM ↔ Płyta</span>
                             <span class="summary__value" id="live-ramtype">—</span>
                         </div>
                         <div class="summary__item">
-                            <span class="summary__label">Chłodzenie vs TDP</span>
+                            <span class="summary__label" data-i18n="summary_cooling">Chłodzenie vs TDP</span>
                             <span class="summary__value" id="live-cooling">—</span>
                         </div>
                         <div class="summary__item">
-                            <span class="summary__label">Obudowa vs płyta</span>
+                            <span class="summary__label" data-i18n="summary_casefit">Obudowa vs płyta</span>
                             <span class="summary__value" id="live-casefit">—</span>
                         </div>
                     </div>
@@ -205,28 +234,28 @@
 
                 <div class="configurator__actions"
                     style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
-                    <button type="button" class="btn btn--secondary" id="btn-reset-all">
+                    <button type="button" class="btn btn--secondary" id="btn-reset-all" data-i18n="btn_reset">
                         Wyczyść zestaw &#10006;
                     </button>
-                    <button type="button" class="btn btn--primary" id="btn-analyze">
+                    <button type="button" class="btn btn--primary" id="btn-analyze" data-i18n="btn_analyze">
                         Analizuj kompatybilność &#9889;
                     </button>
-                    <a href="#zamowienie" class="btn btn--secondary nav__link" data-section="zamowienie">
+                    <a href="#zamowienie" class="btn btn--secondary nav__link" data-section="zamowienie" data-i18n="btn_go_order">
                         Przejdź do zamówienia &#8594;
                     </a>
                 </div>
 
                 <div class="results" id="server-results">
-                    <h3 class="results__title">Wyniki analizy serwera</h3>
+                    <h3 class="results__title" data-i18n="results_title">Wyniki analizy serwera</h3>
                     <div class="results__grid">
                         <div class="results__item">
-                            <span class="results__label">Wydajność zestawu</span>
+                            <span class="results__label" data-i18n="results_perf">Wydajność zestawu</span>
                             <span class="results__value" id="res-perf">—</span>
                         </div>
                     </div>
                     <p class="results__bottleneck" id="res-bottleneck"></p>
                     <div class="results__chart">
-                        <h4 style="text-align:center; color:#e2e8f0; margin-bottom:10px;">Podział poboru mocy</h4>
+                        <h4 style="text-align:center; color:#e2e8f0; margin-bottom:10px;" data-i18n="results_power_chart">Podział poboru mocy</h4>
                         <div id="power-bar"
                             style="display:flex; height: 20px; border-radius: 4px; overflow: hidden; margin-bottom: 10px;">
                         </div>
@@ -239,38 +268,47 @@
         </section>
 
         <section id="zamowienie" class="section spa-view section--alt">
-            <h2 class="section__title">Formularz zamówienia</h2>
-            <p class="section__subtitle">Podaj swoje dane, aby złożyć zamówienie skonfigurowanego zestawu.</p>
+            <h2 class="section__title" data-i18n="order_title">Formularz zamówienia</h2>
+            <p class="section__subtitle" data-i18n="order_subtitle">Podaj swoje dane, aby złożyć zamówienie skonfigurowanego zestawu.</p>
 
             <form id="order-form" class="order-form card" novalidate>
                 <div class="form-group">
-                    <label for="order-name" class="form-label">Imię i nazwisko</label>
+                    <label for="order-name" class="form-label" data-i18n="order_name_label">Imię i nazwisko</label>
                     <input type="text" id="order-name" class="form-input" name="name" required autocomplete="name"
-                        placeholder="Jan Kowalski">
+                        data-i18n-placeholder="order_name_placeholder" placeholder="Jan Kowalski">
                     <span class="form-error" id="error-name"></span>
                 </div>
                 <div class="form-group">
-                    <label for="order-email" class="form-label">Adres e-mail</label>
+                    <label for="order-email" class="form-label" data-i18n="order_email_label">Adres e-mail</label>
                     <input type="email" id="order-email" class="form-input" name="email" required autocomplete="email"
-                        placeholder="jan@kowalski.pl">
+                        data-i18n-placeholder="order_email_placeholder" placeholder="jan@kowalski.pl">
                     <span class="form-error" id="error-email"></span>
                 </div>
                 <div class="form-group">
-                    <label for="order-zip" class="form-label">Kod pocztowy</label>
+                    <label for="order-zip" class="form-label" data-i18n="order_zip_label">Kod pocztowy</label>
                     <input type="text" id="order-zip" class="form-input" name="zip" required autocomplete="postal-code"
-                        placeholder="00-000" maxlength="6">
+                        data-i18n-placeholder="order_zip_placeholder" placeholder="00-000" maxlength="6">
                     <span class="form-error" id="error-zip"></span>
                 </div>
                 <div class="form-group">
-                    <label for="order-phone" class="form-label">Telefon (opcjonalnie)</label>
+                    <label for="order-phone" class="form-label" data-i18n="order_phone_label">Telefon (opcjonalnie)</label>
                     <input type="tel" id="order-phone" class="form-input" name="phone" autocomplete="tel"
-                        placeholder="+48 123 456 789">
+                        data-i18n-placeholder="order_phone_placeholder" placeholder="+48 123 456 789">
                     <span class="form-error" id="error-phone"></span>
                 </div>
-                <button type="submit" class="btn btn--primary btn--glow btn--full" id="btn-order">
+                <!-- RODO consent checkbox -->
+                <div class="form-group form-group--checkbox">
+                    <label class="checkbox-label" for="rodo-consent">
+                        <input type="checkbox" id="rodo-consent" name="rodo-consent" required>
+                        <span class="checkbox-custom"></span>
+                        <span class="checkbox-text" data-i18n="order_rodo_consent">Wyrażam zgodę na przetwarzanie moich danych osobowych w celu realizacji zamówienia (wymagane).</span>
+                    </label>
+                    <span class="form-error" id="error-rodo"></span>
+                </div>
+                <button type="submit" class="btn btn--primary btn--glow btn--full" id="btn-order" data-i18n="order_submit">
                     Złóż zamówienie &#10003;
                 </button>
-                <p style="font-size: 0.75rem; color: #64748b; text-align: center; margin-top: 10px;">
+                <p style="font-size: 0.75rem; color: #64748b; text-align: center; margin-top: 10px;" data-i18n="order_rodo">
                     Administratorem Twoich danych osobowych jest PC Builder. Dane podane w formularzu będą przetwarzane
                     wyłącznie w celu realizacji zamówienia.
                 </p>
@@ -279,20 +317,20 @@
         </section>
 
         <section id="gra" class="section spa-view">
-            <h2 class="section__title">Gra - Kółko i krzyżyk</h2>
-            <p class="section__subtitle">Zagraj z botem (3 poziomy trudności) lub ze znajomym.</p>
+            <h2 class="section__title" data-i18n="game_title">Gra - Kółko i krzyżyk</h2>
+            <p class="section__subtitle" data-i18n="game_subtitle">Zagraj z botem (3 poziomy trudności) lub ze znajomym.</p>
             <div class="card game-container" style="max-width: 450px; margin: 0 auto; text-align: center;">
                 <div style="display:flex; justify-content:center; gap:10px; margin-bottom:15px;">
-                    <button class="btn btn--secondary aktywny" id="btn-1osoba">1 Gracz (vs Bot)</button>
-                    <button class="btn btn--secondary" id="btn-2osoby">2 Graczy</button>
+                    <button class="btn btn--secondary aktywny" id="btn-1osoba" data-i18n="game_1player">1 Gracz (vs Bot)</button>
+                    <button class="btn btn--secondary" id="btn-2osoby" data-i18n="game_2players">2 Graczy</button>
                 </div>
                 <div id="poziom-kontener" style="display:flex; justify-content:center; gap:5px; margin-bottom:15px;">
                     <button class="btn btn--secondary btn-poziom" data-poziom="1"
-                        style="padding:5px 10px; font-size:0.8rem;">Łatwy</button>
+                        style="padding:5px 10px; font-size:0.8rem;" data-i18n="game_easy">Łatwy</button>
                     <button class="btn btn--secondary btn-poziom aktywny" data-poziom="2"
-                        style="padding:5px 10px; font-size:0.8rem;">Średni</button>
+                        style="padding:5px 10px; font-size:0.8rem;" data-i18n="game_medium">Średni</button>
                     <button class="btn btn--secondary btn-poziom" data-poziom="3"
-                        style="padding:5px 10px; font-size:0.8rem;">Trudny</button>
+                        style="padding:5px 10px; font-size:0.8rem;" data-i18n="game_hard">Trudny</button>
                 </div>
                 <div id="status" style="margin-bottom: 15px; font-weight: bold; font-size: 1.2rem;">Kolej gracza: X
                 </div>
@@ -326,54 +364,58 @@
                         style="background: rgba(255,255,255,0.05); border-radius: 4px; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: bold; cursor: pointer;">
                     </div>
                 </div>
-                <button type="button" class="btn btn--primary" id="btn-restart">Zagraj ponownie</button>
+                <button type="button" class="btn btn--primary" id="btn-restart" data-i18n="game_restart">Zagraj ponownie</button>
             </div>
         </section>
 
         <section id="o-projekcie" class="section spa-view section--alt">
-            <h2 class="section__title">O projekcie</h2>
-            <p class="section__subtitle">Architektura i wykorzystane technologie.</p>
+            <h2 class="section__title" data-i18n="about_title">O projekcie</h2>
+            <p class="section__subtitle" data-i18n="about_subtitle">Architektura i wykorzystane technologie.</p>
 
             <div class="about__grid">
                 <article class="card card--about">
-                    <h3 class="card__title">🏗️ Architektura One Page / SPA</h3>
-                    <p>Aplikacja została zbudowana na koncepcji SPA (Single Page Application). Posiada jeden plik HTML,
+                    <h3 class="card__title" data-i18n="about_spa_title">🏗️ Architektura One Page / SPA</h3>
+                    <p data-i18n="about_spa_desc">Aplikacja została zbudowana na koncepcji SPA (Single Page Application). Posiada jeden plik HTML,
                         w którym zawarte są wszystkie widoki. Nawigacja odbywa się bez przeładowania strony z
                         wykorzystaniem logiki w języku JavaScript i CSS.</p>
                 </article>
                 <article class="card card--about">
-                    <h3 class="card__title">🚀 Czysty JavaScript (Vanilla JS)</h3>
-                    <p>Cała logika biznesowa opiera się na podstawowych mechanizmach języka JavaScript bez
+                    <h3 class="card__title" data-i18n="about_js_title">🚀 Czysty JavaScript (Vanilla JS)</h3>
+                    <p data-i18n="about_js_desc">Cała logika biznesowa opiera się na podstawowych mechanizmach języka JavaScript bez
                         wykorzystywania dodatkowych bibliotek.</p>
                 </article>
                 <article class="card card--about">
-                    <h3 class="card__title">🎨 Czysty CSS</h3>
-                    <p>Strona nie wykorzystuje żadnego zewnętrznego frameworka UI. Layout zbudowano natywnie w oparciu o
+                    <h3 class="card__title" data-i18n="about_css_title">🎨 Czysty CSS</h3>
+                    <p data-i18n="about_css_desc">Strona nie wykorzystuje żadnego zewnętrznego frameworka UI. Layout zbudowano natywnie w oparciu o
                         Flexboxy i Grid. Pasek użycia mocy również został zaimplementowany z wykorzystaniem natywnych
                         właściwości CSS.</p>
                 </article>
                 <article class="card card--about">
-                    <h3 class="card__title">🧩 Architektura MVC</h3>
-                    <p>Projekt jest przystosowany do działania w architekturze <strong>Model-View-Controller</strong>,
+                    <h3 class="card__title" data-i18n="about_mvc_title">🧩 Architektura MVC</h3>
+                    <p data-i18n="about_mvc_desc">Projekt jest przystosowany do działania w architekturze <strong>Model-View-Controller</strong>,
                         gdzie warstwą logiki danych i API jest samodzielny backend zbudowany w Node.js, natomiast
                         widokiem jest plik index.html.</p>
                 </article>
                 <article class="card card--about">
-                    <h3 class="card__title">🛡️ Ochrona danych (Szyfrowanie)</h3>
-                    <p>Dane wrażliwe z formularza zamówienia przed umieszczeniem w bazie danych ORM przechodzą
+                    <h3 class="card__title" data-i18n="about_security_title">🛡️ Ochrona danych (Szyfrowanie)</h3>
+                    <p data-i18n="about_security_desc">Dane wrażliwe z formularza zamówienia przed umieszczeniem w bazie danych ORM przechodzą
                         hashowanie w oparciu o algorytm <strong>SHA-256</strong>.</p>
                 </article>
                 <article class="card card--about">
-                    <h3 class="card__title">🎮 Gra w kółko i krzyżyk</h3>
-                    <p>Na stronie można znaleźć także interaktywny element - grę w Kółko i Krzyżyk. Posiada tryb gry
+                    <h3 class="card__title" data-i18n="about_game_title">🎮 Gra w kółko i krzyżyk</h3>
+                    <p data-i18n="about_game_desc">Na stronie można znaleźć także interaktywny element - grę w Kółko i Krzyżyk. Posiada tryb gry
                         dwuosobowej oraz tryb gry z botem na trzech poziomach trudności.</p>
                 </article>
                 <article class="card card--about">
-                    <h3 class="card__title">📦 Kod serwera</h3>
-                    <p>Spakowany kod realizujący logikę po stronie serwera udostępniam do pobrania poniżej.</p>
+                    <h3 class="card__title" data-i18n="about_i18n_title">🌐 Wielojęzyczność (i18n)</h3>
+                    <p data-i18n="about_i18n_desc">Strona obsługuje wiele wersji językowych dzięki systemowi tłumaczeń opartemu na zewnętrznych plikach zasobów JSON. Dodanie nowego języka wymaga jedynie utworzenia nowego pliku tłumaczenia.</p>
+                </article>
+                <article class="card card--about">
+                    <h3 class="card__title" data-i18n="about_server_title">📦 Kod serwera</h3>
+                    <p data-i18n="about_server_desc">Spakowany kod realizujący logikę po stronie serwera udostępniam do pobrania poniżej.</p>
                     <div style="margin-top: 15px; text-align: center;">
                         <a href="backend.zip" download class="btn btn--primary btn--glow"
-                            style="padding: 10px 20px; font-size: 0.9rem;">
+                            style="padding: 10px 20px; font-size: 0.9rem;" data-i18n="about_download">
                             &#128190; Pobierz backend.zip
                         </a>
                     </div>
@@ -383,13 +425,14 @@
     </main>
 
     <footer class="footer">
-        <p>&copy; 2026 Programowanie w Internecie &bull; Szymon Świeboda (s223412)</p>
+        <p data-i18n="footer_text">&copy; 2026 Programowanie w Internecie &bull; Szymon Świeboda (s223412)</p>
     </footer>
 
-    <button id="btn-top" class="btn-top" type="button" aria-label="Przewiń do góry">&#8593;</button>
+    <button id="btn-top" class="btn-top" type="button" data-i18n-aria="btn_top_label" aria-label="Przewiń do góry">&#8593;</button>
 
-    <script src="main.js?v=4"></script>
-    <script src="gra.js?v=4"></script>
+    <script src="tlumaczenia.js?v=1"></script>
+    <script src="main.js?v=5"></script>
+    <script src="gra.js?v=5"></script>
 
 </body>
 

@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         wykonajRuch(kliknietaKomorka, indeks, aktywnyGracz);
 
         if (graTrwa && tryb1Osoba && aktywnyGracz === 'O') {
-            statusGry.textContent = 'Trwa ruch bota...';
+            statusGry.textContent = Tlumaczenia.pobierzTekst('game_bot_thinking');
             setTimeout(ruchBota, 500); // Tak żeby bot udawał że się zastanawia co robi
         }
     }
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (graTrwa) {
             aktywnyGracz = aktywnyGracz === 'X' ? 'O' : 'X';
             if (!(tryb1Osoba && aktywnyGracz === 'O')) {
-                statusGry.textContent = `Kolej gracza: ${aktywnyGracz}`;
+                statusGry.textContent = Tlumaczenia.pobierzTekst('game_turn', aktywnyGracz);
             }
         }
     }
@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (wygrana) {
-            statusGry.textContent = `Wygrywa gracz: ${aktywnyGracz}!`;
+            statusGry.textContent = Tlumaczenia.pobierzTekst('game_winner', aktywnyGracz);
             graTrwa = false;
             wygrywajacyWzklad.forEach(indeks => {
                 document.querySelector(`.komorka[data-indeks="${indeks}"]`).classList.add('wygrana');
@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (!stanGry.includes('')) {
-            statusGry.textContent = 'Remis!';
+            statusGry.textContent = Tlumaczenia.pobierzTekst('game_draw');
             graTrwa = false;
             return;
         }
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
         stanGry = ['', '', '', '', '', '', '', '', ''];
         aktywnyGracz = 'X';
         graTrwa = true;
-        statusGry.textContent = `Kolej gracza: ${aktywnyGracz}`;
+        statusGry.textContent = Tlumaczenia.pobierzTekst('game_turn', aktywnyGracz);
 
         komorki.forEach(komorka => {
             komorka.textContent = '';
@@ -179,4 +179,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     komorki.forEach(komorka => komorka.addEventListener('click', obslugaKlikniecia));
     btnRestart.addEventListener('click', zresetujGre);
+
+    // Reaguj na zmianę języka – zaktualizuj status gry
+    if (typeof Tlumaczenia !== 'undefined') {
+        Tlumaczenia.poZmianieJezyka(function () {
+            if (graTrwa) {
+                if (tryb1Osoba && aktywnyGracz === 'O') {
+                    statusGry.textContent = I18n.t('game_bot_thinking');
+                } else {
+                    statusGry.textContent = I18n.t('game_turn', aktywnyGracz);
+                }
+            }
+        });
+    }
 });

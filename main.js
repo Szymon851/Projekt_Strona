@@ -1,6 +1,45 @@
 document.addEventListener('DOMContentLoaded', function () {
     var API_URL = 'https://projekt-strona-72e7.onrender.com';
 
+    // ===== COOKIE CONSENT =====
+    (function initCookieBanner() {
+        var banner = document.getElementById('cookie-banner');
+        var btnAccept = document.getElementById('cookie-accept');
+        var btnReject = document.getElementById('cookie-reject');
+
+        // Sprawdź, czy użytkownik już wyraził zgodę
+        if (localStorage.getItem('pcbuilder-cookies')) {
+            banner.classList.add('hidden');
+        } else {
+            banner.classList.add('visible');
+        }
+
+        btnAccept.addEventListener('click', function () {
+            localStorage.setItem('pcbuilder-cookies', 'all');
+            banner.classList.remove('visible');
+            banner.classList.add('hidden');
+        });
+
+        btnReject.addEventListener('click', function () {
+            localStorage.setItem('pcbuilder-cookies', 'essential');
+            banner.classList.remove('visible');
+            banner.classList.add('hidden');
+        });
+    })();
+
+    // ===== INICJALIZACJA i18n =====
+    Tlumaczenia.zainicjuj().then(function () {
+        // Po załadowaniu tłumaczeń, aktualizuj dynamiczne elementy
+        updateLiveSummary();
+    });
+
+    // Reaguj na zmianę języka
+    Tlumaczenia.poZmianieJezyka(function () {
+        // Przebuduj selecty z nowymi tłumaczeniami
+        applyFilters();
+        updateLiveSummary();
+    });
+
     var PARTS = {
         cpu: {
             'i3-12100f': { name: 'Intel Core i3-12100F', group: 'Intel (LGA 1700)', power: 58, perf: 55, price: 400, socket: 'LGA1700', tdp: 89, brand: 'intel' },
@@ -190,8 +229,9 @@ document.addEventListener('DOMContentLoaded', function () {
         var psuPrices = { 400: 150, 500: 200, 550: 280, 650: 350, 750: 500, 850: 550, 1000: 700, 1200: 900 };
         if (psuW && psuPrices[psuW]) totalPrice += psuPrices[psuW];
 
+        var recPsu = 0;
         if (hasAnySelected) {
-            var recPsu = Math.ceil((totalPower * 1.3) / 50) * 50;
+            recPsu = Math.ceil((totalPower * 1.3) / 50) * 50;
             document.getElementById('live-power').textContent = totalPower + ' W';
             document.getElementById('live-rec-psu').textContent = recPsu + ' W';
             document.getElementById('live-price').textContent = totalPrice + ' PLN';
@@ -210,9 +250,9 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 setCompat('compat-cpu', '✗ ' + cpu.socket, 'error');
                 setCompat('compat-mobo', '✗ ' + mobo.socket, 'error');
-                document.getElementById('live-socket').textContent = '✗ Niezgodne!';
+                document.getElementById('live-socket').textContent = Tlumaczenia.pobierzTekst('compat_incompatible');
                 document.getElementById('live-socket').className = 'summary__value error';
-                warnings.push('🚫 CPU (' + cpu.socket + ') nie pasuje do płyty (' + mobo.socket + ')!');
+                warnings.push(Tlumaczenia.pobierzTekst('warn_socket', cpu.socket, mobo.socket));
             }
         } else {
             setCompat('compat-cpu', ''); setCompat('compat-mobo', '');
@@ -227,9 +267,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('live-ramtype').className = 'summary__value ok';
             } else {
                 setCompat('compat-ram', '✗ ' + ram.type + '!', 'error');
-                document.getElementById('live-ramtype').textContent = '✗ Niezgodne!';
+                document.getElementById('live-ramtype').textContent = Tlumaczenia.pobierzTekst('compat_incompatible');
                 document.getElementById('live-ramtype').className = 'summary__value error';
-                warnings.push('🚫 RAM (' + ram.type + ') nie pasuje do płyty (' + mobo.ramType + ')!');
+                warnings.push(Tlumaczenia.pobierzTekst('warn_ram', ram.type, mobo.ramType));
             }
         } else {
             setCompat('compat-ram', '');
@@ -239,14 +279,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (cpu && cooling) {
             if (cooling.maxTdp >= cpu.tdp) {
-                setCompat('compat-cooling', '✓ OK (' + cooling.maxTdp + 'W)', 'ok');
-                document.getElementById('live-cooling').textContent = '✓ OK';
+                setCompat('compat-cooling', Tlumaczenia.pobierzTekst('compat_ok') + ' (' + cooling.maxTdp + 'W)', 'ok');
+                document.getElementById('live-cooling').textContent = Tlumaczenia.pobierzTekst('compat_ok');
                 document.getElementById('live-cooling').className = 'summary__value ok';
             } else {
-                setCompat('compat-cooling', '✗ Za słabe!', 'error');
-                document.getElementById('live-cooling').textContent = '✗ Za słabe!';
+                setCompat('compat-cooling', Tlumaczenia.pobierzTekst('compat_too_weak'), 'error');
+                document.getElementById('live-cooling').textContent = Tlumaczenia.pobierzTekst('compat_too_weak');
                 document.getElementById('live-cooling').className = 'summary__value error';
-                warnings.push('🚫 Chłodzenie (' + cooling.maxTdp + 'W TDP) za słabe dla CPU (' + cpu.tdp + 'W TDP)!');
+                warnings.push(Tlumaczenia.pobierzTekst('warn_cooling', cooling.maxTdp, cpu.tdp));
             }
         } else {
             setCompat('compat-cooling', '');
@@ -258,14 +298,14 @@ document.addEventListener('DOMContentLoaded', function () {
             var moboSize = FORM_FITS[mobo.formFactor] || 0;
             var caseSize = FORM_FITS[pcCase.maxForm] || 0;
             if (caseSize >= moboSize) {
-                setCompat('compat-case', '✓ Pasuje', 'ok');
-                document.getElementById('live-casefit').textContent = '✓ OK';
+                setCompat('compat-case', Tlumaczenia.pobierzTekst('compat_fits'), 'ok');
+                document.getElementById('live-casefit').textContent = Tlumaczenia.pobierzTekst('compat_ok');
                 document.getElementById('live-casefit').className = 'summary__value ok';
             } else {
-                setCompat('compat-case', '✗ Za mała!', 'error');
-                document.getElementById('live-casefit').textContent = '✗ Za mała!';
+                setCompat('compat-case', Tlumaczenia.pobierzTekst('compat_too_small'), 'error');
+                document.getElementById('live-casefit').textContent = Tlumaczenia.pobierzTekst('compat_too_small');
                 document.getElementById('live-casefit').className = 'summary__value error';
-                warnings.push('🚫 Obudowa (' + pcCase.maxForm + ') za mała na płytę (' + mobo.formFactor + ')!');
+                warnings.push(Tlumaczenia.pobierzTekst('warn_case', pcCase.maxForm, mobo.formFactor));
             }
         } else {
             setCompat('compat-case', '');
@@ -276,25 +316,25 @@ document.addEventListener('DOMContentLoaded', function () {
         var psuEl = document.getElementById('live-psu-status');
         if (psuW > 0) {
             if (psuW >= recPsu) {
-                psuEl.textContent = '✓ OK'; psuEl.className = 'summary__value ok';
-                setCompat('compat-psu', '✓ OK', 'ok');
+                psuEl.textContent = Tlumaczenia.pobierzTekst('compat_ok'); psuEl.className = 'summary__value ok';
+                setCompat('compat-psu', Tlumaczenia.pobierzTekst('compat_ok'), 'ok');
             } else if (psuW >= totalPower) {
-                psuEl.textContent = '⚠ Mały zapas'; psuEl.className = 'summary__value warn';
-                setCompat('compat-psu', '⚠ Mały zapas', 'warn');
-                warnings.push('⚠ Zasilacz ma mały zapas mocy. Zalecane min. ' + recPsu + ' W.');
+                psuEl.textContent = Tlumaczenia.pobierzTekst('compat_low_reserve'); psuEl.className = 'summary__value warn';
+                setCompat('compat-psu', Tlumaczenia.pobierzTekst('compat_low_reserve'), 'warn');
+                warnings.push(Tlumaczenia.pobierzTekst('warn_psu_reserve', recPsu));
             } else {
-                psuEl.textContent = '✗ Za słaby!'; psuEl.className = 'summary__value error';
-                setCompat('compat-psu', '✗ Za słaby!', 'error');
-                warnings.push('🚫 Zasilacz (' + psuW + 'W) za słaby! System wymaga min. ' + totalPower + ' W.');
+                psuEl.textContent = Tlumaczenia.pobierzTekst('compat_psu_weak'); psuEl.className = 'summary__value error';
+                setCompat('compat-psu', Tlumaczenia.pobierzTekst('compat_psu_weak'), 'error');
+                warnings.push(Tlumaczenia.pobierzTekst('warn_psu_weak', psuW, totalPower));
             }
             if (gpu && gpu.minPsu && psuW < gpu.minPsu) {
-                warnings.push('🚫 GPU wymaga zasilacza min. ' + gpu.minPsu + ' W!');
+                warnings.push(Tlumaczenia.pobierzTekst('warn_gpu_psu', gpu.minPsu));
                 setCompat('compat-gpu', '⚠ PSU min. ' + gpu.minPsu + 'W', 'warn');
             } else if (gpu && gpu.minPsu) {
-                setCompat('compat-gpu', '✓ OK', 'ok');
+                setCompat('compat-gpu', Tlumaczenia.pobierzTekst('compat_ok'), 'ok');
             }
         } else {
-            psuEl.textContent = 'Wybierz PSU'; psuEl.className = 'summary__value';
+            psuEl.textContent = Tlumaczenia.pobierzTekst('compat_select_psu'); psuEl.className = 'summary__value';
             setCompat('compat-psu', ''); setCompat('compat-gpu', '');
         }
 
@@ -336,7 +376,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var groups = {};
 
         // Wyczyść select i dodaj opcję domyślną
-        sel.innerHTML = '<option value="">--- Wybierz ---</option>';
+        sel.innerHTML = '<option value="">' + Tlumaczenia.pobierzTekst('config_select_default') + '</option>';
 
         opts.forEach(function (o) {
             if (o.value === '' || allowedValues === null || allowedValues.indexOf(o.value) !== -1) {
@@ -476,10 +516,10 @@ document.addEventListener('DOMContentLoaded', function () {
         var gpu = selectors.gpu.value;
         var ram = selectors.ram.value;
         if (!cpu || !gpu || !ram) {
-            alert('Wybierz przynajmniej CPU, GPU i RAM przed analiz\u0105.');
+            alert(Tlumaczenia.pobierzTekst('alert_select_parts'));
             return;
         }
-        btnAnalyze.textContent = 'Analizowanie\u2026';
+        btnAnalyze.textContent = Tlumaczenia.pobierzTekst('btn_analyze_loading');
         btnAnalyze.disabled = true;
         try {
             var res = await fetch(API_URL + '/api/calculate', {
@@ -503,7 +543,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('res-perf').textContent = d.stats.performanceScore + '/100';
                 var bnEl = document.getElementById('res-bottleneck');
                 bnEl.textContent = d.stats.bottleneck;
-                bnEl.className = 'results__bottleneck ' + (d.stats.bottleneck.includes('zbalansowany') ? 'balanced' : 'warning');
+                bnEl.className = 'results__bottleneck ' + (d.stats.bottleneck.includes('zbalansowany') || d.stats.bottleneck.includes('Balanced') ? 'balanced' : 'warning');
                 document.getElementById('server-results').classList.add('visible');
                 var pb = document.getElementById('power-bar');
                 var pl = document.getElementById('power-legend');
@@ -520,11 +560,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Bottleneck suggestion
                 generateBottleneckSuggestion(cpu, gpu);
-            } else { alert('B\u0142\u0105d: ' + json.message); }
+            } else { alert(Tlumaczenia.pobierzTekst('error_prefix') + json.message); }
         } catch (err) {
-            alert('Nie uda\u0142o si\u0119 po\u0142\u0105czy\u0107 z serwerem.\n' + err.message);
+            alert(Tlumaczenia.pobierzTekst('alert_server_error') + err.message);
         } finally {
-            btnAnalyze.textContent = 'Analizuj na serwerze \u26A1';
+            btnAnalyze.textContent = Tlumaczenia.pobierzTekst('btn_analyze_done');
             btnAnalyze.disabled = false;
         }
     });
@@ -546,16 +586,14 @@ document.addEventListener('DOMContentLoaded', function () {
             suggestionEl.innerHTML = '<div class="suggestion suggestion--balanced">' +
                 '<div class="suggestion__icon">\u2705</div>' +
                 '<div class="suggestion__content">' +
-                '<h4 class="suggestion__title">Zestaw zbalansowany</h4>' +
-                '<p class="suggestion__desc">Tw\u00f3j procesor i karta graficzna s\u0105 dobrze dobrane \u2014 brak bottlenecka.</p>' +
+                '<h4 class="suggestion__title">' + Tlumaczenia.pobierzTekst('suggestion_balanced_title') + '</h4>' +
+                '<p class="suggestion__desc">' + Tlumaczenia.pobierzTekst('suggestion_balanced_desc') + '</p>' +
                 '</div></div>';
             return;
         }
 
         // Current total price for reference
         var currentTotalPrice = 0;
-        var currentCpuData = PARTS.cpu[selectors.cpu.value];
-        var currentGpuData = PARTS.gpu[selectors.gpu.value];
         Object.keys(selectors).forEach(function (key) {
             var val = selectors[key].value;
             if (key === 'psu') {
@@ -589,20 +627,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 suggestionEl.innerHTML = '<div class="suggestion suggestion--upgrade">' +
                     '<div class="suggestion__icon">\uD83D\uDD27</div>' +
                     '<div class="suggestion__content">' +
-                    '<h4 class="suggestion__title">Proponowany zamiennik GPU</h4>' +
-                    '<p class="suggestion__desc">Tw\u00f3j procesor (<strong>' + cpuData.name + '</strong>, ' + cpuPerf + ' pkt) znacznie przewy\u017Csza kart\u0119 graficzn\u0105 (<strong>' + gpuData.name + '</strong>, ' + gpuPerf + ' pkt).</p>' +
+                    '<h4 class="suggestion__title">' + Tlumaczenia.pobierzTekst('suggestion_gpu_title') + '</h4>' +
+                    '<p class="suggestion__desc">' + Tlumaczenia.pobierzTekst('suggestion_gpu_desc_1') + '<strong>' + cpuData.name + '</strong>, ' + cpuPerf + Tlumaczenia.pobierzTekst('suggestion_pts') + Tlumaczenia.pobierzTekst('suggestion_gpu_desc_2') + '<strong>' + gpuData.name + '</strong>, ' + gpuPerf + Tlumaczenia.pobierzTekst('suggestion_pts') + ').</p>' +
                     '<div class="suggestion__replacement">' +
                     '<div class="suggestion__arrow">\u27A1</div>' +
                     '<div class="suggestion__new-part">' +
                     '<span class="suggestion__part-name">' + bestMatch.name + '</span>' +
-                    '<span class="suggestion__part-perf">Wydajno\u015b\u0107: ' + bestMatch.perf + ' pkt</span>' +
+                    '<span class="suggestion__part-perf">' + Tlumaczenia.pobierzTekst('suggestion_perf') + bestMatch.perf + Tlumaczenia.pobierzTekst('suggestion_pts') + '</span>' +
                     '</div></div>' +
                     '<div class="suggestion__price-info">' +
                     '<span class="suggestion__price-diff ' + (priceDiff > 0 ? 'price-up' : 'price-down') + '">' +
                     (priceDiff > 0 ? '+' : '') + priceDiff + ' PLN</span>' +
-                    '<span class="suggestion__price-total">Nowa cena zestawu: <strong>' + newTotalPrice + ' PLN</strong></span>' +
+                    '<span class="suggestion__price-total">' + Tlumaczenia.pobierzTekst('suggestion_new_price') + '<strong>' + newTotalPrice + ' PLN</strong></span>' +
                     '</div>' +
-                    '<button type="button" class="btn btn--primary btn--suggestion" data-swap-type="gpu" data-swap-id="' + bestMatch.id + '">Zamie\u0144 GPU \u21BB</button>' +
+                    '<button type="button" class="btn btn--primary btn--suggestion" data-swap-type="gpu" data-swap-id="' + bestMatch.id + '">' + Tlumaczenia.pobierzTekst('suggestion_swap_gpu') + '</button>' +
                     '</div></div>';
             }
         } else if (gpuPerf > cpuPerf + 20) {
@@ -626,20 +664,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 suggestionEl.innerHTML = '<div class="suggestion suggestion--upgrade">' +
                     '<div class="suggestion__icon">\uD83D\uDD27</div>' +
                     '<div class="suggestion__content">' +
-                    '<h4 class="suggestion__title">Proponowany zamiennik CPU</h4>' +
-                    '<p class="suggestion__desc">Twoja karta graficzna (<strong>' + gpuData.name + '</strong>, ' + gpuPerf + ' pkt) znacznie przewy\u017Csza procesor (<strong>' + cpuData.name + '</strong>, ' + cpuPerf + ' pkt).</p>' +
+                    '<h4 class="suggestion__title">' + Tlumaczenia.pobierzTekst('suggestion_cpu_title') + '</h4>' +
+                    '<p class="suggestion__desc">' + Tlumaczenia.pobierzTekst('suggestion_cpu_desc_1') + '<strong>' + gpuData.name + '</strong>, ' + gpuPerf + Tlumaczenia.pobierzTekst('suggestion_pts') + Tlumaczenia.pobierzTekst('suggestion_cpu_desc_2') + '<strong>' + cpuData.name + '</strong>, ' + cpuPerf + Tlumaczenia.pobierzTekst('suggestion_pts') + ').</p>' +
                     '<div class="suggestion__replacement">' +
                     '<div class="suggestion__arrow">\u27A1</div>' +
                     '<div class="suggestion__new-part">' +
                     '<span class="suggestion__part-name">' + bestMatch.name + '</span>' +
-                    '<span class="suggestion__part-perf">Wydajno\u015b\u0107: ' + bestMatch.perf + ' pkt</span>' +
+                    '<span class="suggestion__part-perf">' + Tlumaczenia.pobierzTekst('suggestion_perf') + bestMatch.perf + Tlumaczenia.pobierzTekst('suggestion_pts') + '</span>' +
                     '</div></div>' +
                     '<div class="suggestion__price-info">' +
                     '<span class="suggestion__price-diff ' + (priceDiff > 0 ? 'price-up' : 'price-down') + '">' +
                     (priceDiff > 0 ? '+' : '') + priceDiff + ' PLN</span>' +
-                    '<span class="suggestion__price-total">Nowa cena zestawu: <strong>' + newTotalPrice + ' PLN</strong></span>' +
+                    '<span class="suggestion__price-total">' + Tlumaczenia.pobierzTekst('suggestion_new_price') + '<strong>' + newTotalPrice + ' PLN</strong></span>' +
                     '</div>' +
-                    '<button type="button" class="btn btn--primary btn--suggestion" data-swap-type="cpu" data-swap-id="' + bestMatch.id + '">Zamie\u0144 CPU \u21BB</button>' +
+                    '<button type="button" class="btn btn--primary btn--suggestion" data-swap-type="cpu" data-swap-id="' + bestMatch.id + '">' + Tlumaczenia.pobierzTekst('suggestion_swap_cpu') + '</button>' +
                     '</div></div>';
             }
         }
@@ -674,23 +712,33 @@ document.addEventListener('DOMContentLoaded', function () {
     var emailInput = document.getElementById('order-email');
     var zipInput = document.getElementById('order-zip');
     var phoneInput = document.getElementById('order-phone');
+    var rodoConsent = document.getElementById('rodo-consent');
 
     function validateField(input, errorId, rule) {
         var errEl = document.getElementById(errorId);
         var msg = '';
-        if (input.hasAttribute('required') && !input.value.trim()) {
-            msg = 'To pole jest wymagane.';
+        if (input.type === 'checkbox') {
+            if (input.hasAttribute('required') && !input.checked) {
+                msg = Tlumaczenia.pobierzTekst('field_rodo_required');
+            }
+        } else if (input.hasAttribute('required') && !input.value.trim()) {
+            msg = Tlumaczenia.pobierzTekst('field_required');
         } else if (rule && input.value.trim() && !rule.test(input.value.trim())) {
-            if (errorId === 'error-email') msg = 'Nieprawidłowy format e-mail.';
-            else if (errorId === 'error-zip') msg = 'Wymagany format: XX-XXX.';
-            else if (errorId === 'error-phone') msg = 'Nieprawidłowy numer telefonu.';
+            if (errorId === 'error-email') msg = Tlumaczenia.pobierzTekst('field_email_invalid');
+            else if (errorId === 'error-zip') msg = Tlumaczenia.pobierzTekst('field_zip_invalid');
+            else if (errorId === 'error-phone') msg = Tlumaczenia.pobierzTekst('field_phone_invalid');
         }
         if (msg) {
             input.classList.add('invalid'); input.classList.remove('valid');
             errEl.textContent = msg; return false;
         }
-        if (input.value.trim()) { input.classList.add('valid'); input.classList.remove('invalid'); }
-        else { input.classList.remove('valid', 'invalid'); }
+        if (input.type === 'checkbox') {
+            if (input.checked) { input.classList.add('valid'); input.classList.remove('invalid'); }
+            else { input.classList.remove('valid', 'invalid'); }
+        } else {
+            if (input.value.trim()) { input.classList.add('valid'); input.classList.remove('invalid'); }
+            else { input.classList.remove('valid', 'invalid'); }
+        }
         errEl.textContent = ''; return true;
     }
 
@@ -698,6 +746,7 @@ document.addEventListener('DOMContentLoaded', function () {
     emailInput.addEventListener('input', function () { validateField(emailInput, 'error-email', REGEX.email); });
     zipInput.addEventListener('input', function () { validateField(zipInput, 'error-zip', REGEX.zip); });
     phoneInput.addEventListener('input', function () { validateField(phoneInput, 'error-phone', REGEX.phone); });
+    rodoConsent.addEventListener('change', function () { validateField(rodoConsent, 'error-rodo'); });
 
     orderForm.addEventListener('submit', async function (e) {
         e.preventDefault();
@@ -708,7 +757,8 @@ document.addEventListener('DOMContentLoaded', function () {
         var v2 = validateField(emailInput, 'error-email', REGEX.email);
         var v3 = validateField(zipInput, 'error-zip', REGEX.zip);
         var v4 = validateField(phoneInput, 'error-phone', REGEX.phone);
-        if (!v1 || !v2 || !v3) return;
+        var v5 = validateField(rodoConsent, 'error-rodo');
+        if (!v1 || !v2 || !v3 || !v5) return;
         if (phoneInput.value.trim() && !v4) return;
 
         var cpu = PARTS.cpu[selectors.cpu.value];
@@ -717,18 +767,18 @@ document.addEventListener('DOMContentLoaded', function () {
         var psuW = parseInt(selectors.psu.value) || 0;
         if (!cpu || !gpu || !ram || !psuW) {
             conf.className = 'order-confirmation error';
-            conf.textContent = 'Najpierw skonfiguruj kompletny zestaw (CPU, GPU, RAM, PSU).';
+            conf.textContent = Tlumaczenia.pobierzTekst('order_config_missing');
             return;
         }
         var totalPower = cpu.power + gpu.power + ram.power + 50;
         if (psuW < totalPower) {
             conf.className = 'order-confirmation error';
-            conf.textContent = '🚫 Zasilacz (' + psuW + 'W) za słaby! Min. ' + totalPower + 'W. Zmień zasilacz.';
+            conf.textContent = Tlumaczenia.pobierzTekst('order_psu_weak', psuW, totalPower);
             return;
         }
 
         var btnOrder = document.getElementById('btn-order');
-        btnOrder.textContent = 'Wysyłanie…'; btnOrder.disabled = true;
+        btnOrder.textContent = Tlumaczenia.pobierzTekst('order_submit_loading'); btnOrder.disabled = true;
         try {
             var res = await fetch(API_URL + '/api/order', {
                 method: 'POST',
@@ -755,9 +805,9 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         } catch (err) {
             conf.className = 'order-confirmation error';
-            conf.textContent = 'Błąd połączenia: ' + err.message;
+            conf.textContent = Tlumaczenia.pobierzTekst('order_connection_error') + err.message;
         } finally {
-            btnOrder.textContent = 'Złóż zamówienie ✓'; btnOrder.disabled = false;
+            btnOrder.textContent = Tlumaczenia.pobierzTekst('order_submit'); btnOrder.disabled = false;
         }
     });
 
