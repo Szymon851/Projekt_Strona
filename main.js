@@ -3,13 +3,13 @@ document.addEventListener('DOMContentLoaded', function () {
     window.lastOrderMessage = null;
     var API_URL = 'https://projekt-strona-72e7.onrender.com';
 
-    // ===== COOKIE CONSENT =====
+    // Zgoda na ciasteczna
     (function initCookieBanner() {
         var banner = document.getElementById('cookie-banner');
         var btnAccept = document.getElementById('cookie-accept');
         var btnReject = document.getElementById('cookie-reject');
 
-        // Sprawdź, czy użytkownik już wyraził zgodę
+        // Sprawdzenie, czy użytkownik już wyraził zgodę
         if (localStorage.getItem('pcbuilder-cookies')) {
             banner.classList.add('hidden');
         } else {
@@ -29,15 +29,13 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     })();
 
-    // ===== INICJALIZACJA i18n =====
+    // Inicjalizacja i18n
     Tlumaczenia.zainicjuj().then(function () {
-        // Po załadowaniu tłumaczeń, aktualizuj dynamiczne elementy
         updateLiveSummary();
     });
 
-    // Reaguj na zmianę języka
+    // Reakcja na zmianę języka
     Tlumaczenia.poZmianieJezyka(function () {
-        // Przebuduj selecty z nowymi tłumaczeniami
         applyFilters();
         updateLiveSummary();
     });
@@ -154,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // ===== SPA NAWIGACJA =====
+    // SPA NAWIGACJA 
     var views = document.querySelectorAll('.spa-view');
     function showView(id) {
         views.forEach(function (v) {
@@ -186,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function () {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // LIVE SUMMARY
+    // PODSUMOWANIE NA ŻYWO
     var selectors = {
         cpu: document.getElementById('cpu-select'),
         mobo: document.getElementById('mobo-select'),
@@ -417,7 +415,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var selectedMobo = PARTS.mobo[selectors.mobo.value];
         var selectedRam = PARTS.ram[selectors.ram.value];
 
-        // Filtruj CPU
+        // Filtrowanie CPU
         var allowedCpu = [];
         Object.keys(PARTS.cpu).forEach(function (id) {
             var brand = getCpuBrand(id);
@@ -427,7 +425,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         rebuildSelect(selectors.cpu, 'cpu', allowedCpu);
 
-        // Filtruj płyty główne
+        // Filtrowanie płyt głównych
         var allowedMobo = [];
         Object.keys(PARTS.mobo).forEach(function (id) {
             var mobo = PARTS.mobo[id];
@@ -437,7 +435,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         rebuildSelect(selectors.mobo, 'mobo', allowedMobo);
 
-        // Filtruj GPU
+        // Filtrowanie GPU
         var allowedGpu = [];
         Object.keys(PARTS.gpu).forEach(function (id) {
             if (id === 'none') { allowedGpu.push(id); return; }
@@ -447,7 +445,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         rebuildSelect(selectors.gpu, 'gpu', allowedGpu);
 
-        // Filtruj RAM
+        // Filtrowanie RAMu
         var allowedRam = [];
         Object.keys(PARTS.ram).forEach(function (id) {
             if (isAutoFilter && selectedMobo && PARTS.ram[id].type !== selectedMobo.ramType) return;
@@ -455,7 +453,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         rebuildSelect(selectors.ram, 'ram', allowedRam);
 
-        // Filtruj chłodzenie (pokaż tylko te co dadzą radę z wybranym CPU)
+        // Filtrowanie chłodzenia
         var allowedCooling = [];
         var curCpu = PARTS.cpu[selectors.cpu.value];
         Object.keys(PARTS.cooling).forEach(function (id) {
@@ -464,7 +462,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         rebuildSelect(selectors.cooling, 'cooling', allowedCooling);
 
-        // Filtruj obudowę (pokaż tylko te co zmieszczą wybraną płytę)
+        // Filtrowanie obudowy
         var allowedCase = [];
         var curMobo = PARTS.mobo[selectors.mobo.value];
         Object.keys(PARTS.pcCase).forEach(function (id) {
@@ -503,7 +501,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Przy zmianie komponentu filtruj i aktualizuj podsumowanie
+    // Filtrowanie i aktualizowanie podsumowania
     Object.values(selectors).forEach(function (sel) {
         sel.addEventListener('change', function () {
             applyFilters();
@@ -598,7 +596,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var gpuPerf = gpuData.perf;
         var diff = Math.abs(cpuPerf - gpuPerf);
 
-        // No bottleneck
+        // Gdy nie ma bottlenecka
         if (diff <= 20) {
             suggestionEl.innerHTML = '<div class="suggestion suggestion--balanced">' +
                 '<div class="suggestion__icon">\u2705</div>' +
@@ -609,7 +607,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        // Current total price for reference
+        // Całkowita wartość zestawu
         var currentTotalPrice = 0;
         Object.keys(selectors).forEach(function (key) {
             var val = selectors[key].value;
@@ -626,7 +624,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         if (cpuPerf > gpuPerf + 20) {
-            // GPU bottleneck - suggest better GPU
+            // GPU bottleneck - sugestia lepszego GPU
             var bestMatch = null;
             var bestDiff = Infinity;
             Object.keys(PARTS.gpu).forEach(function (id) {
@@ -661,12 +659,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     '</div></div>';
             }
         } else if (gpuPerf > cpuPerf + 20) {
-            // CPU bottleneck - suggest better CPU
+            // CPU bottleneck - sugestia lepszego CPU
             var bestMatch = null;
             var bestDiff = Infinity;
             Object.keys(PARTS.cpu).forEach(function (id) {
                 var c = PARTS.cpu[id];
-                // Only suggest CPUs with same socket as currently selected mobo (if any)
                 var selectedMobo = PARTS.mobo[selectors.mobo.value];
                 if (selectedMobo && c.socket !== selectedMobo.socket) return;
                 var d = Math.abs(gpuPerf - c.perf);
@@ -699,7 +696,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        // Attach swap button handler
+        // Przycisk do zmiany komponentu
         var swapBtn = suggestionEl.querySelector('.btn--suggestion');
         if (swapBtn) {
             swapBtn.addEventListener('click', function () {
@@ -711,7 +708,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     selectors.cpu.value = swapId;
                 }
                 applyFilters();
-                // Re-run analysis
                 btnAnalyze.click();
             });
         }
@@ -852,7 +848,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // ===== RESET KOMPONENTÓW =====
+    // RESET KOMPONENTÓW
     document.querySelectorAll('.card__reset').forEach(function (btn) {
         btn.addEventListener('click', function () {
             var targetId = this.getAttribute('data-target');
@@ -872,7 +868,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.select').forEach(function (select) {
                 select.value = "";
             });
-            // Reset filtrów marek do domyślnych (Wszystkie)
+            // Reset filtrów marek do domyślnych
             if (typeof activeBrandFilters !== 'undefined') {
                 activeBrandFilters['cpu-brand'] = 'all';
                 activeBrandFilters['gpu-brand'] = 'all';
