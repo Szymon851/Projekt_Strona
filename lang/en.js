@@ -154,7 +154,7 @@ window.TlumaczeniaDanych['en'] = {
     "about_i18n_desc": "The website supports multiple language versions thanks to a translation system based on external JavaScript resource files. Adding a new language requires only creating a new translation file.",
     "about_server_title": "📦 Server Code",
     "about_server_desc": "The packaged code implementing server-side logic is available for download below.",
-    "about_download": "💾 Download KodStrony_Szymon_Swieboda_s223412.zip",
+    "about_download": "💾 Download KodStrony_s223412.zip",
 
     "footer_text": "© 2026 Web Programming • Szymon Świeboda (s223412)",
     "btn_top_label": "Scroll to top",
