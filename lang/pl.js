@@ -151,7 +151,7 @@ window.TlumaczeniaDanych['pl'] = {
     "about_game_title": "🎮 Gra w kółko i krzyżyk",
     "about_game_desc": "Na stronie można znaleźć także interaktywny element - grę w Kółko i Krzyżyk. Posiada tryb gry dwuosobowej oraz tryb gry z botem na trzech poziomach trudności.",
     "about_i18n_title": "🌐 Wielojęzyczność (i18n)",
-    "about_i18n_desc": "Strona obsługuje wiele wersji językowych dzięki systemowi tłumaczeń opartemu na zewnętrznych plikach zasobów JSON. Dodanie nowego języka wymaga jedynie utworzenia nowego pliku tłumaczenia.",
+    "about_i18n_desc": "Strona obsługuje wiele wersji językowych dzięki systemowi tłumaczeń opartemu na zewnętrznych plikach zasobów JavaScript (.js). Dodanie nowego języka wymaga jedynie utworzenia nowego pliku tłumaczenia.",
     "about_server_title": "📦 Kod serwera",
     "about_server_desc": "Spakowany kod realizujący logikę po stronie serwera udostępniam do pobrania poniżej.",
     "about_download": "💾 Pobierz backend.zip",
@@ -163,5 +163,11 @@ window.TlumaczeniaDanych['pl'] = {
     "cookie_text": "Ta strona wykorzystuje pliki cookies w celu zapewnienia prawidłowego działania serwisu oraz analizy ruchu. Korzystając z serwisu, wyrażasz zgodę na wykorzystywanie plików cookies zgodnie z polityką prywatności. Możesz zmienić ustawienia cookies w swojej przeglądarce.",
     "cookie_accept": "Akceptuję wszystkie",
     "cookie_reject": "Tylko niezbędne",
-    "cookie_more": "Dowiedz się więcej"
+    "cookie_more": "Dowiedz się więcej",
+
+    "bottleneck_balanced": "Zestaw zbalansowany",
+    "bottleneck_gpu": "GPU Bottleneck - procesor przewyższa kartę graficzną",
+    "bottleneck_cpu": "CPU Bottleneck - karta graficzna przewyższa procesor",
+    "chart_ram_other": "RAM + Inne",
+    "order_success": "Zamówienie zapisane w bazie! Potwierdzenie wysłane na: {0}"
 };

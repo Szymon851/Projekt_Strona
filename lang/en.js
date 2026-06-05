@@ -151,7 +151,7 @@ window.TlumaczeniaDanych['en'] = {
     "about_game_title": "🎮 Tic Tac Toe Game",
     "about_game_desc": "The page also features an interactive element - a Tic Tac Toe game. It has both a two-player mode and a bot mode with three difficulty levels.",
     "about_i18n_title": "🌐 Multilingual (i18n)",
-    "about_i18n_desc": "The website supports multiple language versions thanks to a translation system based on external JSON resource files. Adding a new language requires only creating a new translation file.",
+    "about_i18n_desc": "The website supports multiple language versions thanks to a translation system based on external JavaScript (.js) resource files. Adding a new language requires only creating a new translation file.",
     "about_server_title": "📦 Server Code",
     "about_server_desc": "The packaged code implementing server-side logic is available for download below.",
     "about_download": "💾 Download backend.zip",
@@ -163,5 +163,11 @@ window.TlumaczeniaDanych['en'] = {
     "cookie_text": "This website uses cookies to ensure proper operation and traffic analysis. By using the website, you consent to the use of cookies in accordance with the privacy policy. You can change cookie settings in your browser.",
     "cookie_accept": "Accept all",
     "cookie_reject": "Essential only",
-    "cookie_more": "Learn more"
+    "cookie_more": "Learn more",
+
+    "bottleneck_balanced": "Balanced build",
+    "bottleneck_gpu": "GPU Bottleneck - processor outperforms graphics card",
+    "bottleneck_cpu": "CPU Bottleneck - graphics card outperforms processor",
+    "chart_ram_other": "RAM + Other",
+    "order_success": "Order saved to database! Confirmation sent to: {0}"
 };

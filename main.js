@@ -542,7 +542,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 var d = json.data;
                 document.getElementById('res-perf').textContent = d.stats.performanceScore + '/100';
                 var bnEl = document.getElementById('res-bottleneck');
-                bnEl.textContent = d.stats.bottleneck;
+                var bnText = d.stats.bottleneck;
+                if (bnText.includes('Zestaw zbalansowany')) bnText = Tlumaczenia.pobierzTekst('bottleneck_balanced');
+                else if (bnText.includes('GPU Bottleneck')) bnText = Tlumaczenia.pobierzTekst('bottleneck_gpu');
+                else if (bnText.includes('CPU Bottleneck')) bnText = Tlumaczenia.pobierzTekst('bottleneck_cpu');
+                bnEl.textContent = bnText;
                 bnEl.className = 'results__bottleneck ' + (d.stats.bottleneck.includes('zbalansowany') || d.stats.bottleneck.includes('Balanced') ? 'balanced' : 'warning');
                 document.getElementById('server-results').classList.add('visible');
                 var pb = document.getElementById('power-bar');
@@ -553,9 +557,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 d.chartData.labels.forEach(function (label, i) {
                     var val = d.chartData.datasets[0].data[i];
                     if (val <= 0) return;
+                    var tLabel = label;
+                    if (label === 'RAM + Inne') tLabel = Tlumaczenia.pobierzTekst('chart_ram_other');
                     var pct = (val / total * 100).toFixed(1) + '%';
-                    pb.innerHTML += '<div style="width:' + pct + '; background:' + colors[i] + '; display:flex; align-items:center; justify-content:center; color:white; font-size:11px;" title="' + label + ': ' + val + 'W">' + val + 'W</div>';
-                    pl.innerHTML += '<div style="display:flex; align-items:center; gap:5px;"><span style="display:inline-block; width:12px; height:12px; background:' + colors[i] + '; border-radius:3px;"></span>' + label + '</div>';
+                    pb.innerHTML += '<div style="width:' + pct + '; background:' + colors[i] + '; display:flex; align-items:center; justify-content:center; color:white; font-size:11px;" title="' + tLabel + ': ' + val + 'W">' + val + 'W</div>';
+                    pl.innerHTML += '<div style="display:flex; align-items:center; gap:5px;"><span style="display:inline-block; width:12px; height:12px; background:' + colors[i] + '; border-radius:3px;"></span>' + tLabel + '</div>';
                 });
 
                 // Bottleneck suggestion
@@ -795,7 +801,12 @@ document.addEventListener('DOMContentLoaded', function () {
             var json = await res.json();
             if (json.success) {
                 conf.className = 'order-confirmation success';
-                conf.textContent = '✓ ' + json.message;
+                var msg = json.message;
+                if (msg.startsWith('Zamówienie zapisane')) {
+                    var emailStr = msg.split('na: ')[1] || emailInput.value.trim();
+                    msg = Tlumaczenia.pobierzTekst('order_success', emailStr);
+                }
+                conf.textContent = '✓ ' + msg;
                 orderForm.reset();
                 document.querySelectorAll('.form-input').forEach(function (i) { i.classList.remove('valid', 'invalid'); });
                 document.querySelectorAll('.form-error').forEach(function (e) { e.textContent = ''; });

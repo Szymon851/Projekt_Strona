@@ -18,15 +18,19 @@
     <!-- ===== COOKIE CONSENT BANNER (RODO / GDPR) ===== -->
     <div id="cookie-banner" class="cookie-banner" role="dialog" aria-labelledby="cookie-title" aria-modal="false">
         <div class="cookie-banner__content">
-            <h3 class="cookie-banner__title" id="cookie-title" data-i18n="cookie_title">🍪 Pliki cookies i prywatność</h3>
+            <h3 class="cookie-banner__title" id="cookie-title" data-i18n="cookie_title">🍪 Pliki cookies i prywatność
+            </h3>
             <p class="cookie-banner__text" data-i18n="cookie_text">
-                Ta strona wykorzystuje pliki cookies w celu zapewnienia prawidłowego działania serwisu oraz analizy ruchu.
+                Ta strona wykorzystuje pliki cookies w celu zapewnienia prawidłowego działania serwisu oraz analizy
+                ruchu.
                 Korzystając z serwisu, wyrażasz zgodę na wykorzystywanie plików cookies zgodnie z polityką prywatności.
                 Możesz zmienić ustawienia cookies w swojej przeglądarce.
             </p>
             <div class="cookie-banner__actions">
-                <button type="button" class="btn btn--primary cookie-btn" id="cookie-accept" data-i18n="cookie_accept">Akceptuję wszystkie</button>
-                <button type="button" class="btn btn--secondary cookie-btn" id="cookie-reject" data-i18n="cookie_reject">Tylko niezbędne</button>
+                <button type="button" class="btn btn--primary cookie-btn" id="cookie-accept"
+                    data-i18n="cookie_accept">Akceptuję wszystkie</button>
+                <button type="button" class="btn btn--secondary cookie-btn" id="cookie-reject"
+                    data-i18n="cookie_reject">Tylko niezbędne</button>
             </div>
         </div>
     </div>
@@ -35,18 +39,21 @@
         <div class="nav__container">
             <a href="#hero" class="nav__logo nav__link" data-section="hero">PC Builder</a>
 
-            <button class="nav__hamburger" id="hamburger" type="button" data-i18n-aria="nav_hamburger_label" aria-label="Otwórz menu" aria-expanded="false"
-                aria-controls="nav-menu">
+            <button class="nav__hamburger" id="hamburger" type="button" data-i18n-aria="nav_hamburger_label"
+                aria-label="Otwórz menu" aria-expanded="false" aria-controls="nav-menu">
                 <span class="nav__hamburger-line"></span>
                 <span class="nav__hamburger-line"></span>
                 <span class="nav__hamburger-line"></span>
             </button>
             <ul class="nav__menu" id="nav-menu">
                 <li><a href="#hero" class="nav__link active" data-section="hero" data-i18n="nav_start">Start</a></li>
-                <li><a href="#konfigurator" class="nav__link" data-section="konfigurator" data-i18n="nav_configurator">Konfigurator</a></li>
-                <li><a href="#zamowienie" class="nav__link" data-section="zamowienie" data-i18n="nav_order">Zamówienie</a></li>
+                <li><a href="#konfigurator" class="nav__link" data-section="konfigurator"
+                        data-i18n="nav_configurator">Konfigurator</a></li>
+                <li><a href="#zamowienie" class="nav__link" data-section="zamowienie"
+                        data-i18n="nav_order">Zamówienie</a></li>
                 <li><a href="#gra" class="nav__link" data-section="gra" data-i18n="nav_game">Gra</a></li>
-                <li><a href="#o-projekcie" class="nav__link" data-section="o-projekcie" data-i18n="nav_about">O projekcie</a></li>
+                <li><a href="#o-projekcie" class="nav__link" data-section="o-projekcie" data-i18n="nav_about">O
+                        projekcie</a></li>
                 <li class="nav__lang-item">
                     <!-- ===== LANGUAGE SWITCHER ===== -->
                     <div class="lang-switcher" id="lang-switcher">
@@ -67,11 +74,15 @@
     <header id="hero" class="hero spa-view active">
 
         <div class="hero__content">
-            <h1 class="hero__title"><span data-i18n="hero_title_1">Zaawansowany </span><span class="hero__highlight" data-i18n="hero_title_highlight">Konfigurator PC</span></h1>
-            <p class="hero__subtitle" data-i18n="hero_subtitle">Szymon Świeboda &bull; s223412 &bull; Programowanie w Internecie</p>
-            <p class="hero__desc" data-i18n="hero_desc">Zbuduj swój wymarzony komputer. Dobierz komponenty, sprawdź kompatybilność,
+            <h1 class="hero__title"><span data-i18n="hero_title_1">Zaawansowany </span><span class="hero__highlight"
+                    data-i18n="hero_title_highlight">Konfigurator PC</span></h1>
+            <p class="hero__subtitle" data-i18n="hero_subtitle">Szymon Świeboda &bull; s223412 &bull; Programowanie w
+                Internecie</p>
+            <p class="hero__desc" data-i18n="hero_desc">Zbuduj swój wymarzony komputer. Dobierz komponenty, sprawdź
+                kompatybilność,
                 pobór mocy i wydajność - wszystko w czasie rzeczywistym.</p>
-            <a href="#konfigurator" class="btn btn--primary nav__link" data-section="konfigurator" data-i18n="hero_cta">Rozpocznij
+            <a href="#konfigurator" class="btn btn--primary nav__link" data-section="konfigurator"
+                data-i18n="hero_cta">Rozpocznij
                 konfigurację &#8595;</a>
         </div>
     </header>
@@ -79,7 +90,8 @@
     <main>
         <section id="konfigurator" class="section spa-view">
             <h2 class="section__title" data-i18n="config_title">Dobierz podzespoły</h2>
-            <p class="section__subtitle" data-i18n="config_subtitle">Wybierz komponenty z każdej kategorii. System automatycznie sprawdzi
+            <p class="section__subtitle" data-i18n="config_subtitle">Wybierz komponenty z każdej kategorii. System
+                automatycznie sprawdzi
                 kompatybilność i obliczy parametry zestawu.</p>
             <div class="filter-bar">
                 <div class="filter-bar__item">
@@ -91,13 +103,15 @@
                 </div>
                 <div class="filter-bar__item">
                     <span class="filter-bar__label">CPU:</span>
-                    <button class="filter-btn active" data-filter="cpu-brand" data-value="all" data-i18n="config_all">Wszystkie</button>
+                    <button class="filter-btn active" data-filter="cpu-brand" data-value="all"
+                        data-i18n="config_all">Wszystkie</button>
                     <button class="filter-btn" data-filter="cpu-brand" data-value="intel">Intel</button>
                     <button class="filter-btn" data-filter="cpu-brand" data-value="amd">AMD</button>
                 </div>
                 <div class="filter-bar__item">
                     <span class="filter-bar__label">GPU:</span>
-                    <button class="filter-btn active" data-filter="gpu-brand" data-value="all" data-i18n="config_all">Wszystkie</button>
+                    <button class="filter-btn active" data-filter="gpu-brand" data-value="all"
+                        data-i18n="config_all">Wszystkie</button>
                     <button class="filter-btn" data-filter="gpu-brand" data-value="nvidia">NVIDIA</button>
                     <button class="filter-btn" data-filter="gpu-brand" data-value="amd">AMD</button>
                 </div>
@@ -241,7 +255,8 @@
                     <button type="button" class="btn btn--primary" id="btn-analyze" data-i18n="btn_analyze">
                         Analizuj kompatybilność &#9889;
                     </button>
-                    <a href="#zamowienie" class="btn btn--secondary nav__link" data-section="zamowienie" data-i18n="btn_go_order">
+                    <a href="#zamowienie" class="btn btn--secondary nav__link" data-section="zamowienie"
+                        data-i18n="btn_go_order">
                         Przejdź do zamówienia &#8594;
                     </a>
                 </div>
@@ -256,7 +271,8 @@
                     </div>
                     <p class="results__bottleneck" id="res-bottleneck"></p>
                     <div class="results__chart">
-                        <h4 style="text-align:center; color:#e2e8f0; margin-bottom:10px;" data-i18n="results_power_chart">Podział poboru mocy</h4>
+                        <h4 style="text-align:center; color:#e2e8f0; margin-bottom:10px;"
+                            data-i18n="results_power_chart">Podział poboru mocy</h4>
                         <div id="power-bar"
                             style="display:flex; height: 20px; border-radius: 4px; overflow: hidden; margin-bottom: 10px;">
                         </div>
@@ -270,7 +286,8 @@
 
         <section id="zamowienie" class="section spa-view section--alt">
             <h2 class="section__title" data-i18n="order_title">Formularz zamówienia</h2>
-            <p class="section__subtitle" data-i18n="order_subtitle">Podaj swoje dane, aby złożyć zamówienie skonfigurowanego zestawu.</p>
+            <p class="section__subtitle" data-i18n="order_subtitle">Podaj swoje dane, aby złożyć zamówienie
+                skonfigurowanego zestawu.</p>
 
             <form id="order-form" class="order-form card" novalidate>
                 <div class="form-group">
@@ -292,7 +309,8 @@
                     <span class="form-error" id="error-zip"></span>
                 </div>
                 <div class="form-group">
-                    <label for="order-phone" class="form-label" data-i18n="order_phone_label">Telefon (opcjonalnie)</label>
+                    <label for="order-phone" class="form-label" data-i18n="order_phone_label">Telefon
+                        (opcjonalnie)</label>
                     <input type="tel" id="order-phone" class="form-input" name="phone" autocomplete="tel"
                         data-i18n-placeholder="order_phone_placeholder" placeholder="+48 123 456 789">
                     <span class="form-error" id="error-phone"></span>
@@ -302,14 +320,17 @@
                     <label class="checkbox-label" for="rodo-consent">
                         <input type="checkbox" id="rodo-consent" name="rodo-consent" required>
                         <span class="checkbox-custom"></span>
-                        <span class="checkbox-text" data-i18n="order_rodo_consent">Wyrażam zgodę na przetwarzanie moich danych osobowych w celu realizacji zamówienia (wymagane).</span>
+                        <span class="checkbox-text" data-i18n="order_rodo_consent">Wyrażam zgodę na przetwarzanie moich
+                            danych osobowych w celu realizacji zamówienia (wymagane).</span>
                     </label>
                     <span class="form-error" id="error-rodo"></span>
                 </div>
-                <button type="submit" class="btn btn--primary btn--glow btn--full" id="btn-order" data-i18n="order_submit">
+                <button type="submit" class="btn btn--primary btn--glow btn--full" id="btn-order"
+                    data-i18n="order_submit">
                     Złóż zamówienie &#10003;
                 </button>
-                <p style="font-size: 0.75rem; color: #64748b; text-align: center; margin-top: 10px;" data-i18n="order_rodo">
+                <p style="font-size: 0.75rem; color: #64748b; text-align: center; margin-top: 10px;"
+                    data-i18n="order_rodo">
                     Administratorem Twoich danych osobowych jest PC Builder. Dane podane w formularzu będą przetwarzane
                     wyłącznie w celu realizacji zamówienia.
                 </p>
@@ -319,10 +340,12 @@
 
         <section id="gra" class="section spa-view">
             <h2 class="section__title" data-i18n="game_title">Gra - Kółko i krzyżyk</h2>
-            <p class="section__subtitle" data-i18n="game_subtitle">Zagraj z botem (3 poziomy trudności) lub ze znajomym.</p>
+            <p class="section__subtitle" data-i18n="game_subtitle">Zagraj z botem (3 poziomy trudności) lub ze znajomym.
+            </p>
             <div class="card game-container" style="max-width: 450px; margin: 0 auto; text-align: center;">
                 <div style="display:flex; justify-content:center; gap:10px; margin-bottom:15px;">
-                    <button class="btn btn--secondary aktywny" id="btn-1osoba" data-i18n="game_1player">1 Gracz (vs Bot)</button>
+                    <button class="btn btn--secondary aktywny" id="btn-1osoba" data-i18n="game_1player">1 Gracz (vs
+                        Bot)</button>
                     <button class="btn btn--secondary" id="btn-2osoby" data-i18n="game_2players">2 Graczy</button>
                 </div>
                 <div id="poziom-kontener" style="display:flex; justify-content:center; gap:5px; margin-bottom:15px;">
@@ -365,7 +388,8 @@
                         style="background: rgba(255,255,255,0.05); border-radius: 4px; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: bold; cursor: pointer;">
                     </div>
                 </div>
-                <button type="button" class="btn btn--primary" id="btn-restart" data-i18n="game_restart">Zagraj ponownie</button>
+                <button type="button" class="btn btn--primary" id="btn-restart" data-i18n="game_restart">Zagraj
+                    ponownie</button>
             </div>
         </section>
 
@@ -376,44 +400,53 @@
             <div class="about__grid">
                 <article class="card card--about">
                     <h3 class="card__title" data-i18n="about_spa_title">🏗️ Architektura One Page / SPA</h3>
-                    <p data-i18n="about_spa_desc">Aplikacja została zbudowana na koncepcji SPA (Single Page Application). Posiada jeden plik HTML,
+                    <p data-i18n="about_spa_desc">Aplikacja została zbudowana na koncepcji SPA (Single Page
+                        Application). Posiada jeden plik HTML,
                         w którym zawarte są wszystkie widoki. Nawigacja odbywa się bez przeładowania strony z
                         wykorzystaniem logiki w języku JavaScript i CSS.</p>
                 </article>
                 <article class="card card--about">
                     <h3 class="card__title" data-i18n="about_js_title">🚀 Czysty JavaScript (Vanilla JS)</h3>
-                    <p data-i18n="about_js_desc">Cała logika biznesowa opiera się na podstawowych mechanizmach języka JavaScript bez
+                    <p data-i18n="about_js_desc">Cała logika biznesowa opiera się na podstawowych mechanizmach języka
+                        JavaScript bez
                         wykorzystywania dodatkowych bibliotek.</p>
                 </article>
                 <article class="card card--about">
                     <h3 class="card__title" data-i18n="about_css_title">🎨 Czysty CSS</h3>
-                    <p data-i18n="about_css_desc">Strona nie wykorzystuje żadnego zewnętrznego frameworka UI. Layout zbudowano natywnie w oparciu o
+                    <p data-i18n="about_css_desc">Strona nie wykorzystuje żadnego zewnętrznego frameworka UI. Layout
+                        zbudowano natywnie w oparciu o
                         Flexboxy i Grid. Pasek użycia mocy również został zaimplementowany z wykorzystaniem natywnych
                         właściwości CSS.</p>
                 </article>
                 <article class="card card--about">
                     <h3 class="card__title" data-i18n="about_mvc_title">🧩 Architektura MVC</h3>
-                    <p data-i18n="about_mvc_desc">Projekt jest przystosowany do działania w architekturze <strong>Model-View-Controller</strong>,
+                    <p data-i18n="about_mvc_desc">Projekt jest przystosowany do działania w architekturze
+                        <strong>Model-View-Controller</strong>,
                         gdzie warstwą logiki danych i API jest samodzielny backend zbudowany w Node.js, natomiast
                         widokiem jest plik index.html.</p>
                 </article>
                 <article class="card card--about">
                     <h3 class="card__title" data-i18n="about_security_title">🛡️ Ochrona danych (Szyfrowanie)</h3>
-                    <p data-i18n="about_security_desc">Dane wrażliwe z formularza zamówienia przed umieszczeniem w bazie danych ORM przechodzą
+                    <p data-i18n="about_security_desc">Dane wrażliwe z formularza zamówienia przed umieszczeniem w bazie
+                        danych ORM przechodzą
                         hashowanie w oparciu o algorytm <strong>SHA-256</strong>.</p>
                 </article>
                 <article class="card card--about">
                     <h3 class="card__title" data-i18n="about_game_title">🎮 Gra w kółko i krzyżyk</h3>
-                    <p data-i18n="about_game_desc">Na stronie można znaleźć także interaktywny element - grę w Kółko i Krzyżyk. Posiada tryb gry
+                    <p data-i18n="about_game_desc">Na stronie można znaleźć także interaktywny element - grę w Kółko i
+                        Krzyżyk. Posiada tryb gry
                         dwuosobowej oraz tryb gry z botem na trzech poziomach trudności.</p>
                 </article>
                 <article class="card card--about">
-                    <h3 class="card__title" data-i18n="about_i18n_title">🌐 Wielojęzyczność (i18n)</h3>
-                    <p data-i18n="about_i18n_desc">Strona obsługuje wiele wersji językowych dzięki systemowi tłumaczeń opartemu na zewnętrznych plikach zasobów JSON. Dodanie nowego języka wymaga jedynie utworzenia nowego pliku tłumaczenia.</p>
+                    <h3 class="card__title" data-i18n="about_i18n_title">🌐 Wielojęzyczność</h3>
+                    <p data-i18n="about_i18n_desc">Strona obsługuje wiele wersji językowych dzięki systemowi tłumaczeń
+                        opartemu na zewnętrznych plikach zasobów JavaScript (.js). Dodanie nowego języka wymaga jedynie
+                        utworzenia nowego pliku tłumaczenia.</p>
                 </article>
                 <article class="card card--about">
                     <h3 class="card__title" data-i18n="about_server_title">📦 Kod serwera</h3>
-                    <p data-i18n="about_server_desc">Spakowany kod realizujący logikę po stronie serwera udostępniam do pobrania poniżej.</p>
+                    <p data-i18n="about_server_desc">Spakowany kod realizujący logikę po stronie serwera udostępniam do
+                        pobrania poniżej.</p>
                     <div style="margin-top: 15px; text-align: center;">
                         <a href="backend.zip" download class="btn btn--primary btn--glow"
                             style="padding: 10px 20px; font-size: 0.9rem;" data-i18n="about_download">
@@ -429,7 +462,8 @@
         <p data-i18n="footer_text">&copy; 2026 Programowanie w Internecie &bull; Szymon Świeboda (s223412)</p>
     </footer>
 
-    <button id="btn-top" class="btn-top" type="button" data-i18n-aria="btn_top_label" aria-label="Przewiń do góry">&#8593;</button>
+    <button id="btn-top" class="btn-top" type="button" data-i18n-aria="btn_top_label"
+        aria-label="Przewiń do góry">&#8593;</button>
 
     <script src="tlumaczenia.js?v=1"></script>
     <script src="main.js?v=5"></script>
