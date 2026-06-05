@@ -154,7 +154,7 @@ window.TlumaczeniaDanych['pl'] = {
     "about_i18n_desc": "Strona obsługuje wiele wersji językowych dzięki systemowi tłumaczeń opartemu na zewnętrznych plikach zasobów JavaScript. Dodanie nowego języka wymaga jedynie utworzenia nowego pliku tłumaczenia.",
     "about_server_title": "📦 Kod serwera",
     "about_server_desc": "Spakowany kod realizujący logikę po stronie serwera udostępniam do pobrania poniżej.",
-    "about_download": "💾 Pobierz backend.zip",
+    "about_download": "💾 Pobierz KodStrony_Szymon_Swieboda_s223412.zip",
 
     "footer_text": "© 2026 Programowanie w Internecie • Szymon Świeboda (s223412)",
     "btn_top_label": "Przewiń do góry",
