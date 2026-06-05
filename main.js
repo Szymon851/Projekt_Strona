@@ -736,18 +736,19 @@ document.addEventListener('DOMContentLoaded', function () {
         var msg = '';
         if (input.type === 'checkbox') {
             if (input.hasAttribute('required') && !input.checked) {
-                msg = Tlumaczenia.pobierzTekst('field_rodo_required');
+                msg = 'field_rodo_required';
             }
         } else if (input.hasAttribute('required') && !input.value.trim()) {
-            msg = Tlumaczenia.pobierzTekst('field_required');
+            msg = 'field_required';
         } else if (rule && input.value.trim() && !rule.test(input.value.trim())) {
-            if (errorId === 'error-email') msg = Tlumaczenia.pobierzTekst('field_email_invalid');
-            else if (errorId === 'error-zip') msg = Tlumaczenia.pobierzTekst('field_zip_invalid');
-            else if (errorId === 'error-phone') msg = Tlumaczenia.pobierzTekst('field_phone_invalid');
+            if (errorId === 'error-email') msg = 'field_email_invalid';
+            else if (errorId === 'error-zip') msg = 'field_zip_invalid';
+            else if (errorId === 'error-phone') msg = 'field_phone_invalid';
         }
         if (msg) {
             input.classList.add('invalid'); input.classList.remove('valid');
-            errEl.textContent = msg; return false;
+            errEl.textContent = Tlumaczenia.pobierzTekst(msg);
+            errEl.setAttribute('data-i18n', msg); return false;
         }
         if (input.type === 'checkbox') {
             if (input.checked) { input.classList.add('valid'); input.classList.remove('invalid'); }
@@ -756,7 +757,8 @@ document.addEventListener('DOMContentLoaded', function () {
             if (input.value.trim()) { input.classList.add('valid'); input.classList.remove('invalid'); }
             else { input.classList.remove('valid', 'invalid'); }
         }
-        errEl.textContent = ''; return true;
+        errEl.textContent = ''; 
+        errEl.removeAttribute('data-i18n'); return true;
     }
 
     nameInput.addEventListener('input', function () { validateField(nameInput, 'error-name'); });
