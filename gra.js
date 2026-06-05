@@ -185,9 +185,23 @@ document.addEventListener('DOMContentLoaded', () => {
         Tlumaczenia.poZmianieJezyka(function () {
             if (graTrwa) {
                 if (tryb1Osoba && aktywnyGracz === 'O') {
-                    statusGry.textContent = I18n.t('game_bot_thinking');
+                    statusGry.textContent = Tlumaczenia.pobierzTekst('game_bot_thinking');
                 } else {
-                    statusGry.textContent = I18n.t('game_turn', aktywnyGracz);
+                    statusGry.textContent = Tlumaczenia.pobierzTekst('game_turn', aktywnyGracz);
+                }
+            } else {
+                let wygrana = false;
+                for (let i = 0; i < warunkiWygranej.length; i++) {
+                    const [a, b, c] = warunkiWygranej[i];
+                    if (stanGry[a] && stanGry[a] === stanGry[b] && stanGry[a] === stanGry[c]) {
+                        wygrana = true;
+                        break;
+                    }
+                }
+                if (wygrana) {
+                    statusGry.textContent = Tlumaczenia.pobierzTekst('game_winner', aktywnyGracz);
+                } else {
+                    statusGry.textContent = Tlumaczenia.pobierzTekst('game_draw');
                 }
             }
         });

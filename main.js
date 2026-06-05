@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
+    window.lastAnalysisData = null;
+    window.lastOrderMessage = null;
     var API_URL = 'https://projekt-strona-72e7.onrender.com';
 
     // ===== COOKIE CONSENT =====
@@ -511,6 +513,39 @@ document.addEventListener('DOMContentLoaded', function () {
     // ANALIZA NA SERWERZE
     var btnAnalyze = document.getElementById('btn-analyze');
 
+    function renderAnalysisResults() {
+        if (!window.lastAnalysisData) return;
+        var d = window.lastAnalysisData;
+        var cpu = selectors.cpu.value;
+        var gpu = selectors.gpu.value;
+
+        document.getElementById('res-perf').textContent = d.stats.performanceScore + '/100';
+        var bnEl = document.getElementById('res-bottleneck');
+        var bnText = d.stats.bottleneck;
+        if (bnText.includes('Zestaw zbalansowany')) bnText = Tlumaczenia.pobierzTekst('bottleneck_balanced');
+        else if (bnText.includes('GPU Bottleneck')) bnText = Tlumaczenia.pobierzTekst('bottleneck_gpu');
+        else if (bnText.includes('CPU Bottleneck')) bnText = Tlumaczenia.pobierzTekst('bottleneck_cpu');
+        bnEl.textContent = bnText;
+        bnEl.className = 'results__bottleneck ' + (d.stats.bottleneck.includes('zbalansowany') || d.stats.bottleneck.includes('Balanced') ? 'balanced' : 'warning');
+        
+        var pb = document.getElementById('power-bar');
+        var pl = document.getElementById('power-legend');
+        pb.innerHTML = ''; pl.innerHTML = '';
+        var colors = ['#6c63ff', '#f87171', '#34d399'];
+        var total = d.chartData.datasets[0].data.reduce(function (a, b) { return a + b }, 0);
+        d.chartData.labels.forEach(function (label, i) {
+            var val = d.chartData.datasets[0].data[i];
+            if (val <= 0) return;
+            var tLabel = label;
+            if (label === 'RAM + Inne') tLabel = Tlumaczenia.pobierzTekst('chart_ram_other');
+            var pct = (val / total * 100).toFixed(1) + '%';
+            pb.innerHTML += '<div style="width:' + pct + '; background:' + colors[i] + '; display:flex; align-items:center; justify-content:center; color:white; font-size:11px;" title="' + tLabel + ': ' + val + 'W">' + val + 'W</div>';
+            pl.innerHTML += '<div style="display:flex; align-items:center; gap:5px;"><span style="display:inline-block; width:12px; height:12px; background:' + colors[i] + '; border-radius:3px;"></span>' + tLabel + '</div>';
+        });
+
+        generateBottleneckSuggestion(cpu, gpu);
+    }
+
     btnAnalyze.addEventListener('click', async function () {
         var cpu = selectors.cpu.value;
         var gpu = selectors.gpu.value;
@@ -539,33 +574,9 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!res.ok) throw new Error('Serwer: ' + res.status);
             var json = await res.json();
             if (json.success) {
-                var d = json.data;
-                document.getElementById('res-perf').textContent = d.stats.performanceScore + '/100';
-                var bnEl = document.getElementById('res-bottleneck');
-                var bnText = d.stats.bottleneck;
-                if (bnText.includes('Zestaw zbalansowany')) bnText = Tlumaczenia.pobierzTekst('bottleneck_balanced');
-                else if (bnText.includes('GPU Bottleneck')) bnText = Tlumaczenia.pobierzTekst('bottleneck_gpu');
-                else if (bnText.includes('CPU Bottleneck')) bnText = Tlumaczenia.pobierzTekst('bottleneck_cpu');
-                bnEl.textContent = bnText;
-                bnEl.className = 'results__bottleneck ' + (d.stats.bottleneck.includes('zbalansowany') || d.stats.bottleneck.includes('Balanced') ? 'balanced' : 'warning');
+                window.lastAnalysisData = json.data;
+                renderAnalysisResults();
                 document.getElementById('server-results').classList.add('visible');
-                var pb = document.getElementById('power-bar');
-                var pl = document.getElementById('power-legend');
-                pb.innerHTML = ''; pl.innerHTML = '';
-                var colors = ['#6c63ff', '#f87171', '#34d399'];
-                var total = d.chartData.datasets[0].data.reduce(function (a, b) { return a + b }, 0);
-                d.chartData.labels.forEach(function (label, i) {
-                    var val = d.chartData.datasets[0].data[i];
-                    if (val <= 0) return;
-                    var tLabel = label;
-                    if (label === 'RAM + Inne') tLabel = Tlumaczenia.pobierzTekst('chart_ram_other');
-                    var pct = (val / total * 100).toFixed(1) + '%';
-                    pb.innerHTML += '<div style="width:' + pct + '; background:' + colors[i] + '; display:flex; align-items:center; justify-content:center; color:white; font-size:11px;" title="' + tLabel + ': ' + val + 'W">' + val + 'W</div>';
-                    pl.innerHTML += '<div style="display:flex; align-items:center; gap:5px;"><span style="display:inline-block; width:12px; height:12px; background:' + colors[i] + '; border-radius:3px;"></span>' + tLabel + '</div>';
-                });
-
-                // Bottleneck suggestion
-                generateBottleneckSuggestion(cpu, gpu);
             } else { alert(Tlumaczenia.pobierzTekst('error_prefix') + json.message); }
         } catch (err) {
             alert(Tlumaczenia.pobierzTekst('alert_server_error') + err.message);
@@ -754,6 +765,22 @@ document.addEventListener('DOMContentLoaded', function () {
     phoneInput.addEventListener('input', function () { validateField(phoneInput, 'error-phone', REGEX.phone); });
     rodoConsent.addEventListener('change', function () { validateField(rodoConsent, 'error-rodo'); });
 
+    function renderOrderConfirmation() {
+        if (!window.lastOrderMessage) return;
+        var conf = document.getElementById('order-confirmation');
+        if (window.lastOrderMessage.isError) {
+             conf.className = 'order-confirmation error';
+             conf.textContent = '✗ ' + window.lastOrderMessage.text;
+        } else {
+             conf.className = 'order-confirmation success';
+             if (window.lastOrderMessage.email) {
+                 conf.textContent = '✓ ' + Tlumaczenia.pobierzTekst('order_success', window.lastOrderMessage.email);
+             } else {
+                 conf.textContent = '✓ ' + window.lastOrderMessage.text;
+             }
+        }
+    }
+
     orderForm.addEventListener('submit', async function (e) {
         e.preventDefault();
         var conf = document.getElementById('order-confirmation');
@@ -800,19 +827,20 @@ document.addEventListener('DOMContentLoaded', function () {
             });
             var json = await res.json();
             if (json.success) {
-                conf.className = 'order-confirmation success';
                 var msg = json.message;
                 if (msg.startsWith('Zamówienie zapisane')) {
                     var emailStr = msg.split('na: ')[1] || emailInput.value.trim();
-                    msg = Tlumaczenia.pobierzTekst('order_success', emailStr);
+                    window.lastOrderMessage = { email: emailStr, isError: false };
+                } else {
+                    window.lastOrderMessage = { text: msg, isError: false };
                 }
-                conf.textContent = '✓ ' + msg;
+                renderOrderConfirmation();
                 orderForm.reset();
                 document.querySelectorAll('.form-input').forEach(function (i) { i.classList.remove('valid', 'invalid'); });
                 document.querySelectorAll('.form-error').forEach(function (e) { e.textContent = ''; });
             } else {
-                conf.className = 'order-confirmation error';
-                conf.textContent = '✗ ' + (json.errors ? json.errors.join(' | ') : json.message);
+                window.lastOrderMessage = { text: (json.errors ? json.errors.join(' | ') : json.message), isError: true };
+                renderOrderConfirmation();
             }
         } catch (err) {
             conf.className = 'order-confirmation error';
@@ -865,6 +893,13 @@ document.addEventListener('DOMContentLoaded', function () {
             if (resultsDiv) {
                 resultsDiv.classList.remove('visible');
             }
+        });
+    }
+
+    if (typeof Tlumaczenia !== 'undefined') {
+        Tlumaczenia.poZmianieJezyka(function () {
+            renderAnalysisResults();
+            renderOrderConfirmation();
         });
     }
 
